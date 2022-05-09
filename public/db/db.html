@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- jQuery  -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-SERVICE.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+	<!--firebase 필수 요소-->
+<script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
+	<!--firebase api키 및 정보 js-->
+<script type = "text/javascript" src = "app.js"></script>
+	<!--Google Login정보 js-->
+<script type = "text/javascript" src = "googleLogin.js"></script> 
+	<!--firebase database js-->
+<script type = "text/javascript" src = "database.js"></script>
+
+
+
+
+<div class = "displaydata" style = "color: black;">
+	<h1 id = "loca"></h1>
+	<h1 id = "X"></h1>
+	<h1 id = "Y"></h1>
+	<h1 id = "Z"></h1>
+	<h1 id = "a"></h1>
+	<h1 id = "b"></h1>
+	<h1 id = "p"></h1>
+</div>
+
+</div>
+
+
+<!---------------------HTML 영역--------------------->
+<pre id = "console"></pre>
+
+
+<script>
+	//var searchDB = document.getElementById("message").value;
+
+		firebase.database().ref('IMU_LSM6DS3/1-setFloat').on('value', function(snapshot){
+		if(snapshot.val())
+		{
+			var X = snapshot.val().X;
+			var Y = snapshot.val().Y;
+			var Z = snapshot.val().Z;
+			var a = snapshot.val().a;
+			var b = snapshot.val().b;
+			var p = snapshot.val().p;
+			document.getElementById("X").innerHTML = 'X: '+X+'㎛';
+			document.getElementById("Y").innerHTML = 'Y: '+Y+'ppm';
+			document.getElementById("Z").innerHTML = 'Z: '+Z+'ppm';
+			document.getElementById("a").innerHTML = 'a: '+a+'ppm';
+			document.getElementById("b").innerHTML = 'b: '+b+'ppm';
+			document.getElementById("p").innerHTML = 'p: '+p+'ppm';
+		}
+	})
+
+
+		const consoleDiv = document.getElementById("console");
+		const consoleToHtml = function() {
+    		consoleDiv.textContent += `${(new Date()).toLocaleString("ko-KR")} >>>`
+    		Array.from(arguments).forEach(el => {
+       			 consoleDiv.textContent += " "
+        			const insertValue = typeof el === "object" ? JSON.stringify(el) : el
+        			consoleDiv.textContent += insertValue
+    })
+    consoleDiv.textContent += "\n"
+}
+window.console.log = consoleToHtml
+		firebase.database().ref('IMU_LSM6DS3/1-setFloat').on('value', (snap)=>{
+			console.log(snap.val());
+	}); 
+</script>
+</section>
+</body>
+</html>
+
+<!-- <section class = "w31-error-61-404">
+	<div class = "error-61-main">
+		<div class = "wrapper">
+			<div class = "errors-16-top">
+				<div class = "errors-16-info">
+					<h3>test</h3>
+
+					<p>test1</p>
+					<form atcion ="#" method = "post" class = "d-flex error-page-form">
+						<input type = "text" onkeypress="if(event.keyCode == 13) {return false}" id="message" placeholder = "입력">
+						<button type = "button" onclick = "readdata()">검색</button>
+					</form>
+
+					<div class = "displaydata" style = "color: black;">
+						<h1 id = "loca"></h1>
+						<h1 id = "X"></h1>
+						<h1 id = "Y"></h1>
+						<h1 id = "Z"></h1>
+						<h1 id = "a"></h1>
+						<h1 id = "b"></h1>
+						<h1 id = "p"></h1>
+					</div>
+						<textarea rows= "7" cols = "30" id = "ListResult" readonly></textarea>
+				</div>
+			</div>
+		</div>
+	</div> -->
+
+	<!-- <script>
+		function readdata(){
+		var searchDB = document.getElementById("message").value;
+	
+			firebase.database().ref('IMU_LSM6DS3/' +searchDB).on('value', function(snapshot){
+			if(snapshot.val())
+			{
+				var X = snapshot.val().X;
+				var Y = snapshot.val().Y;
+				var Z = snapshot.val().Z;
+				var a = snapshot.val().a;
+				var b = snapshot.val().b;
+				var p = snapshot.val().p;
+				document.getElementById("loca").innerHTML = '센서값: '+searchDB;
+				document.getElementById("X").innerHTML = 'X: '+X+'ppm';
+				document.getElementById("Y").innerHTML = 'Y: '+Y+'ppm';
+				document.getElementById("Z").innerHTML = 'Z: '+Z+'ppm';
+				document.getElementById("a").innerHTML = 'a: '+a+'ppm';
+				document.getElementById("b").innerHTML = 'b: '+b+'ppm';
+				document.getElementById("p").innerHTML = 'p: '+p+'ppm';
+			}
+		})
+	} -->

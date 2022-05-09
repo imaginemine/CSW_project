@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-SERVICE.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
+    <script type = "text/javascript" src = "db/app.js"></script>
+	<!--Google Login정보 js-->
+    <script type = "text/javascript" src = "googleLogin.js"></script> 
+	<!--firebase database js-->
+    <script type = "text/javascript" src = "db/database.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공기질 확인</title>
+    <link rel = "stylesheet" href="/css/test.css">
+</head>
+
+<h1 class="data-title"><img src = "" style width="100px;height:100px">공기질확인</h1>
+
+ <div class="container">
+        <div align = "right" class="row">
+            <form action = "/html/tutorial.html">
+                <button type="submit" class="button_image">사용방법</button>
+            </form>
+            <form action = "/db/db.html">
+                <button type="submit" class="button_image">센서값DB 확인</button>
+            </form>
+            <form action = "/public_data/public_data_air.html">
+                <button type="submit" class="button_image">공공데이터 확인</button>
+            </form>
+        </div>           
+            
+    </div>
+<div align="center">
+    <a href="https://www.airkorea.or.kr/index"><h3 class ="data-button">에어코리아 실시간접속</h3></a>
+</div>
+<br/>
+
+<div align="center" class = "displaydata" style = "color: black;">
+    <form action = "https://earth.nullschool.net/ko/#current/particulates/surface/level/overlay=pm2.5/orthographic=-232.76,36.76,5764/loc=126.920,35.638">
+        <button type="submit" class="button_image"><img src="./image/pm25.jpg"style width="100px;height:100px"><br>센서<br>초미세먼지<h5 id = "X"></h5></button>
+        <button type="submit" class="button_image"><img src="./image/pm25.jpg"style width="100px;height:100px"><br>데이터<br>초미세먼지<br>???</button>
+    </form>
+</div>
+<hr class = "data-line">
+
+<div align="center" class = "displaydata" style = "color: black;">
+    <form action = "https://earth.nullschool.net/ko/#current/chem/surface/level/overlay=no2/orthographic=-232.76,36.36,7096/loc=126.914,35.605">
+        <button type="submit" class="button_image"><img src="./image/no2.jpg"style width="100px;height:100px"><br>센서<br>이산화질소<h5 id = "Y"></h5></button>
+        <button type="submit" class="button_image"><img src="./image/no2.jpg"style width="100px;height:100px"><br>데이터<br>이산화질소<br>???</button>
+     </form>
+</div>
+<hr class = "data-line">               
+            
+<div align="center" class = "displaydata" style = "color: black;">
+    <form action = "https://earth.nullschool.net/ko/#current/chem/surface/level/overlay=co2sc/orthographic=-232.76,36.36,7096/loc=126.914,35.605">
+        <button type="submit" class="button_image"><img src="./image/co2.jpg"style width="100px;height:100px"><br>센서<br>이산화탄소<h5 id = "Z"></h5></button>
+        <button type="submit" class="button_image"><img src="./image/co2.jpg"style width="100px;height:100px"><br>데이터<br>이산화탄소<br>???</button>
+     </form>
+</div>
+ <hr class = "data-line">
+
+<div align="center" class = "displaydata" style = "color: black;">
+     <form action = "https://earth.nullschool.net/ko/#current/chem/surface/level/overlay=co2sc/orthographic=-232.51,36.27,11746/loc=74.905,29.679">
+         <button type="submit" class="button_image"><img src="./image/o3.jpg"style width="100px;height:100px"><br>센서<br>오존<h5 id = "a"></h5></button>
+         <button type="submit" class="button_image"><img src="./image/o3.jpg"style width="100px;height:100px"><br>데이터<br>오존<br>???</button>
+    </form>
+</div>
+                    
+ <h3 class ="data-define">#define</h3></a>
+
+        <script>
+            //var searchDB = document.getElementById("message").value;
+        
+                firebase.database().ref('IMU_LSM6DS3/1-setFloat').on('value', function(snapshot){
+                if(snapshot.val())
+                {
+                    var X = snapshot.val().X;
+                    var Y = snapshot.val().Y;
+                    var Z = snapshot.val().Z;
+                    var a = snapshot.val().a;
+                    var b = snapshot.val().b;
+                    var p = snapshot.val().p;
+                    document.getElementById("X").innerHTML = ''+X+'㎛';
+                    document.getElementById("Y").innerHTML = ''+Y+'ppm';
+                    document.getElementById("Z").innerHTML = ''+Z+'ppm';
+                    document.getElementById("a").innerHTML = ''+a+'ppm';
+                    document.getElementById("b").innerHTML = ''+b+'ppm';
+                    document.getElementById("p").innerHTML = ''+p+'ppm';
+                }
+            })
+        </script>
+
+</section>

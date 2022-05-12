@@ -11,3 +11,7 @@ https://github.com/PQ777/test1
 6. ngrok로 서버 구축 및 실시간데이터베이스 및 공공데이터 정상 출력 완료
 
 
+
+<img width="634" alt="1" src="https://user-images.githubusercontent.com/102477933/168003462-34bc5f89-41de-41f4-a63f-19e034a6bf6f.PNG">
+
+<img width="629" alt="2" src="https://user-images.githubusercontent.com/102477933/168003472-8f079a4b-3899-433d-a11a-cd4a6efc2cd1.PNG">

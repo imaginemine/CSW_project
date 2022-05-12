@@ -2,12 +2,13 @@
 <html lang="kor">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="120">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type = "text/javascript" src = "test.js"></script>
     <link rel = "stylesheet" href = "./public_data_air.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>관리자 공공데이터</title>
 </head>
 <body>
     <h1 class = "up_title">공공데이터 Open API</h1>
@@ -15,9 +16,9 @@
     <hr />
 
     <div class = "question-box">
-        <h2 class = "title">서울 통합 실시간 공기 데이터</h2>
+        <h2 class = "title">통합 실시간 공기 데이터</h2>
         <h3>초미세먼지 현황</h3>
-        <button onclick = "q1()">업데이트</button>
+        <button id="autoclick1" onclick = "q1()">업데이트</button>
         <u1 id = "names-q1">
 
         </u1>
@@ -25,7 +26,7 @@
 
     <div class = "question-box">
         <h3>오존 현황</h3>
-        <button onclick = "q2()">업데이트</button>
+        <button id="autoclick2" onclick = "q2()">업데이트</button>
         <u1 id = "names-q2">
 
         </u1>
@@ -33,7 +34,7 @@
 
     <div class = "question-box">
         <h3>이산화질소 현황</h3>
-        <button onclick = "q3()">업데이트</button>
+        <button id="autoclick3" onclick = "q3()">업데이트</button>
         <u1 id = "names-q3">
 
         </u1>
@@ -41,11 +42,20 @@
 
     <div class = "question-box">
         <h3>일산화탄소 현황</h3>
-        <button onclick = "q4()">업데이트</button>
+        <button id="autoclick4" onclick = "q4()">업데이트</button>
         <u1 id = "names-q4">
 
         </u1>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#autoclick1").trigger('click');
+            $("#autoclick2").trigger('click');
+            $("#autoclick3").trigger('click');
+            $("#autoclick4").trigger('click');
+        })
+        </script>
+    
 <script>
     function q1(){
         $.ajax({

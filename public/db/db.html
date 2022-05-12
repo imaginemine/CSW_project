@@ -21,13 +21,10 @@
 
 
 <div class = "displaydata" style = "color: black;">
-	<h1 id = "loca"></h1>
-	<h1 id = "X"></h1>
-	<h1 id = "Y"></h1>
-	<h1 id = "Z"></h1>
-	<h1 id = "a"></h1>
-	<h1 id = "b"></h1>
-	<h1 id = "p"></h1>
+	<h1 id = "PM"></h1>
+	<h1 id = "CO2"></h1>
+	<h1 id = "O3"></h1>
+	
 </div>
 
 </div>
@@ -40,22 +37,16 @@
 <script>
 	//var searchDB = document.getElementById("message").value;
 
-		firebase.database().ref('IMU_LSM6DS3/1-setFloat').on('value', function(snapshot){
+		firebase.database().ref('airQuality/1-setFloat').on('value', function(snapshot){
 		if(snapshot.val())
 		{
-			var X = snapshot.val().X;
-			var Y = snapshot.val().Y;
-			var Z = snapshot.val().Z;
-			var a = snapshot.val().a;
-			var b = snapshot.val().b;
-			var p = snapshot.val().p;
-			document.getElementById("X").innerHTML = 'X: '+X+'㎛';
-			document.getElementById("Y").innerHTML = 'Y: '+Y+'ppm';
-			document.getElementById("Z").innerHTML = 'Z: '+Z+'ppm';
-			document.getElementById("a").innerHTML = 'a: '+a+'ppm';
-			document.getElementById("b").innerHTML = 'b: '+b+'ppm';
-			document.getElementById("p").innerHTML = 'p: '+p+'ppm';
-		}
+			var CO2 = snapshot.val().CO2;
+            var O3 = snapshot.val().O3;
+            var PM = snapshot.val().PM;
+                   
+            document.getElementById("CO2").innerHTML = CO2+'ppm';
+            document.getElementById("O3").innerHTML = O3+'ppm';
+            document.getElementById("PM").innerHTML = PM+'㎛';	}
 	})
 
 
@@ -70,7 +61,7 @@
     consoleDiv.textContent += "\n"
 }
 window.console.log = consoleToHtml
-		firebase.database().ref('IMU_LSM6DS3/1-setFloat').on('value', (snap)=>{
+		firebase.database().ref('airQuality/1-setFloat').on('value', (snap)=>{
 			console.log(snap.val());
 	}); 
 </script>

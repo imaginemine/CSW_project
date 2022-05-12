@@ -2,6 +2,7 @@
 <html lang="kor">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="120">
     <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-SERVICE.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
@@ -17,7 +18,7 @@
     <title>공기질 확인</title>
     <link rel = "stylesheet" href="/css/test.css">
 </head>
-
+ 
 <h1 class="data-title"><img src = "" style width="100px;height:100px">공기질확인</h1>
 
  <div class="container">
@@ -39,35 +40,52 @@
 </div>
 <br/>
 
-<div align="center" class = "displaydata" style = "color: black;">
+<div align="center" class = "displaydata" style = "border: 5px solid skyblue; padding: 10px; color: black;">
     <form action = "https://earth.nullschool.net/ko/#current/particulates/surface/level/overlay=pm2.5/orthographic=-232.76,36.76,5764/loc=126.920,35.638">
-        <button type="submit" class="button_image"><img src="./image/pm25.jpg"style width="100px;height:100px"><br>센서<br>초미세먼지<h5 id = "X"></h5></button>
-        <button type="submit" class="button_image"><img src="./image/pm25.jpg"style width="100px;height:100px"><br>데이터<br>초미세먼지<br>???</button>
+        <button type="submit" class="button_image"><img src="./image/pm25.jpg"style width="100px;height:100px"><br>실내<br>초미세먼지<br>농도: <p8 id = "PM"></p8></button>
     </form>
-</div>
-<hr class = "data-line">
+    <button id="autoclick1" onclick = "q1()" type="submit" class="button_image"><img src="./image/pm25.jpg"style width="100px;height:100px"><br>실외<br>초미세먼지<br>농도: <p5 id = "names-q1"></p5></button>
+    <br>
+    <p3 id = "Message_PM2"></p3>
+    <br>
+    <p3 id = "Message_PM"></p3>
 
-<div align="center" class = "displaydata" style = "color: black;">
+</div>
+<br>
+<!--<hr class = "data-line">-->
+
+<div align="center" class = "displaydata" style = "border: 5px solid skyblue; padding: 10px; color: black;">
     <form action = "https://earth.nullschool.net/ko/#current/chem/surface/level/overlay=no2/orthographic=-232.76,36.36,7096/loc=126.914,35.605">
-        <button type="submit" class="button_image"><img src="./image/no2.jpg"style width="100px;height:100px"><br>센서<br>이산화질소<h5 id = "Y"></h5></button>
-        <button type="submit" class="button_image"><img src="./image/no2.jpg"style width="100px;height:100px"><br>데이터<br>이산화질소<br>???</button>
+        <button type="submit" class="button_image"><img src="./image/no2.jpg"style width="100px;height:100px"><br>실내<br>이산화질소<br>농도: <h5 id = "Y"></h5></button>
      </form>
+     <button id="autoclick2" onclick = "q2()" type="submit" class="button_image"><img src="./image/no2.jpg"style width="100px;height:100px"><br>실외<br>이산화질소<br>농도: <p5 id = "names-q2"></p5></button>
 </div>
-<hr class = "data-line">               
+<br>
+<!--<hr class = "data-line">-->               
             
-<div align="center" class = "displaydata" style = "color: black;">
+<div align="center" class = "displaydata" style = "border: 5px solid skyblue; padding: 10px; color: black;">
     <form action = "https://earth.nullschool.net/ko/#current/chem/surface/level/overlay=co2sc/orthographic=-232.76,36.36,7096/loc=126.914,35.605">
-        <button type="submit" class="button_image"><img src="./image/co2.jpg"style width="100px;height:100px"><br>센서<br>이산화탄소<h5 id = "Z"></h5></button>
-        <button type="submit" class="button_image"><img src="./image/co2.jpg"style width="100px;height:100px"><br>데이터<br>이산화탄소<br>???</button>
+        <button type="submit" class="button_image"><img src="./image/co2.jpg"style width="100px;height:100px"><br>실내<br>이산화탄소<br>농도: <p8 id = "CO2"></p8></button>
      </form>
+     <button id="autoclick3" onclick = "q3()" type="submit" class="button_image"><img src="./image/co2.jpg"style width="100px;height:100px"><br>실외<br>이산화탄소<br>농도: <p5 id = "names-q3"></p5></button>
+     <br>
+     <p3 id = "Message_CO22"></p3>
+     <br>
+     <p3 id = "Message_CO2"></p3>
 </div>
- <hr class = "data-line">
+<br>
+ <!--<hr class = "data-line">-->
 
-<div align="center" class = "displaydata" style = "color: black;">
+<div align="center" class = "displaydata" style = "border: 5px solid skyblue; padding: 10px; color: black;">
      <form action = "https://earth.nullschool.net/ko/#current/chem/surface/level/overlay=co2sc/orthographic=-232.51,36.27,11746/loc=74.905,29.679">
-         <button type="submit" class="button_image"><img src="./image/o3.jpg"style width="100px;height:100px"><br>센서<br>오존<h5 id = "a"></h5></button>
-         <button type="submit" class="button_image"><img src="./image/o3.jpg"style width="100px;height:100px"><br>데이터<br>오존<br>???</button>
+         <button type="submit" class="button_image"><img src="./image/o3.jpg"style width="100px;height:100px"><br>실내<br>오존<br>농도: <p8 id = "O3"></p8></button>
     </form>
+    <button id="autoclick4" onclick = "q4()" type="submit" class="button_image"><img src="./image/o3.jpg"style width="100px;height:100px"><br>실외<br>오존<br>농도: <p5 id = "names-q4"></p5></button>
+    <br>
+    <p3 id = "Message_O32"></p3>
+    <br>
+    <p3 id = "Message_O3"></p3>
+
 </div>
                     
  <h3 class ="data-define">#define</h3></a>
@@ -75,23 +93,186 @@
         <script>
             //var searchDB = document.getElementById("message").value;
         
-                firebase.database().ref('IMU_LSM6DS3/1-setFloat').on('value', function(snapshot){
+                firebase.database().ref('airQuality/1-setFloat').on('value', function(snapshot){
                 if(snapshot.val())
                 {
-                    var X = snapshot.val().X;
-                    var Y = snapshot.val().Y;
-                    var Z = snapshot.val().Z;
-                    var a = snapshot.val().a;
-                    var b = snapshot.val().b;
-                    var p = snapshot.val().p;
-                    document.getElementById("X").innerHTML = ''+X+'㎛';
-                    document.getElementById("Y").innerHTML = ''+Y+'ppm';
-                    document.getElementById("Z").innerHTML = ''+Z+'ppm';
-                    document.getElementById("a").innerHTML = ''+a+'ppm';
-                    document.getElementById("b").innerHTML = ''+b+'ppm';
-                    document.getElementById("p").innerHTML = ''+p+'ppm';
+                    var CO2 = snapshot.val().CO2;
+                    var O3 = snapshot.val().O3;
+                    var PM = snapshot.val().PM;
+                   
+                    document.getElementById("CO2").innerHTML = CO2+'ppm';
+                    document.getElementById("O3").innerHTML = O3+'ppm';
+                    document.getElementById("PM").innerHTML = PM+'㎛';
+                    
+                    
                 }
+                    if(PM < 15)
+                    {
+                        document.getElementById("Message_PM").innerHTML ='실내 미세먼지가 좋음('+ PM+'㎛)입니다.<br>실내 환기시켜주세요.';
+                        
+                    }
+                    else if(16 < PM && PM < 35 )
+                    {
+                        document.getElementById("Message_PM").innerHTML ='실내 미세먼지가 보통('+ PM+'㎛)입니다.<br> 호흡기질환 및 노년층분들은 주의해주세요.';
+                    }
+                    else
+                    {
+                        document.getElementById("Message_PM").innerHTML ='실내 미세먼지가 나쁨('+ PM+'㎛)이상입니다.<br> 창문들 닫아주세요.';
+                    }
+
+                    if(O3 < 0.030)
+                    {
+                        document.getElementById("Message_O3").innerHTML ='실내 오존이 좋음('+ O3+'ppm)입니다.';
+                    }
+                    else if(0.031 < O3 && O3 < 0.090 )
+                    {
+                        document.getElementById("Message_O3").innerHTML ='실내 오존이 보통('+ O3+'ppm)입니다.<br> 호흡기질환 및 노년층분들은 주의해주세요.';
+                    }
+                    else
+                    {
+                        document.getElementById("Message_O3").innerHTML ='실내 오존이 나쁨('+ O3+'ppm)이상입니다.<br> 환기시켜주세요.';
+                    }
+
+                    if(CO2 < 450)
+                    {
+                        document.getElementById("Message_CO2").innerHTML ='실내 이산화탄소가 좋음('+ CO2+'ppm)입니다.';
+                    }
+                    else if(451 < O3 && O3 < 1000 )
+                    {
+                        document.getElementById("Message_CO2").innerHTML ='실내 이산화탄소가 보통('+ CO2+'ppm)입니다.<br> 호흡기질환 및 노년층분들은 주의해주세요.';
+                    }
+                    else
+                    {
+                        document.getElementById("Message_CO2").innerHTML ='실내 이산화탄소가 나쁨('+ CO2+'ppm)이상입니다.<br> 환시시켜주세요.';
+                    }
             })
         </script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#autoclick1").trigger('click');
+        $("#autoclick1_message").trigger('click');
+        $("#autoclick2").trigger('click');
+        $("#autoclick3").trigger('click');
+        $("#autoclick4").trigger('click');
+    })
+    </script>
+
+
+<Script>
+    function q1(){
+    $.ajax({
+        type: "GET",
+        url: "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99",
+        data: {},
+        success: function(response){
+            $("#names-q1").empty();
+            let mise = response["RealtimeCityAir"]["row"];
+
+            
+                //let gu_name = mise[1]["MSRSTE_NM"];
+                let gu_mise = mise[1]["PM25"];
+            
+                let str_mise = ``;
+            
+                str_mise = `<p5>${gu_mise}㎛</p5>`;    
+                
+                $("#names-q1").append(str_mise);
+              
+                document.getElementById("Message_PM2").innerHTML ='실외 미세먼지는('+str_mise+')입니다';
+
+            console.log(response)
+        }
+        
+    })
+}
+</Script>
+
+
+
+<Script>
+    function q2(){
+    $.ajax({
+        type: "GET",
+        url: "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99",
+        data: {},
+        success: function(response){
+            $("#names-q2").empty();
+            let mise = response["RealtimeCityAir"]["row"];
+
+            
+                //let gu_name = mise[1]["MSRSTE_NM"];
+                let gu_mise = mise[1]["NO2"];
+            
+                let str_mise = ``;
+            
+                str_mise = `<p5 > ${gu_mise}ppm</p5>`;     
+                
+            
+                $("#names-q2").append(str_mise);
+            
+            console.log(response)
+        }
+    })
+}
+</Script>
+
+<Script>
+    function q3(){
+    $.ajax({
+        type: "GET",
+        url: "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99",
+        data: {},
+        success: function(response){
+            $("#names-q3").empty();
+            let mise = response["RealtimeCityAir"]["row"];
+
+            
+                //let gu_name = mise[1]["MSRSTE_NM"];
+                let gu_mise = mise[1]["CO"];
+            
+                let str_mise = ``;
+            
+                str_mise = `<p5>${gu_mise}ppm</p5>`;     
+                
+            
+                $("#names-q3").append(str_mise);
+
+                document.getElementById("Message_CO22").innerHTML ='실외 이산화탄소는('+str_mise+')입니다';
+            
+            console.log(response)
+        }
+    })
+}
+</Script>
+
+<Script>
+    function q4(){
+    $.ajax({
+        type: "GET",
+        url: "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99",
+        data: {},
+        success: function(response){
+            $("#names-q4").empty();
+            let mise = response["RealtimeCityAir"]["row"];
+
+            
+                //let gu_name = mise[1]["MSRSTE_NM"];
+                let gu_mise = mise[1]["O3"];
+            
+                let str_mise = ``;
+            
+                str_mise = `<p5>${gu_mise}ppm</p5>`;     
+                
+            
+                $("#names-q4").append(str_mise);
+
+                document.getElementById("Message_O32").innerHTML ='실외 오존은('+str_mise+')입니다';
+            
+            console.log(response)
+        }
+    })
+}
+</Script>
 
 </section>

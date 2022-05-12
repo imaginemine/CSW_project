@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class = "question-box">
+        <h2 class = "title">서울 통합 실시간 공기 데이터</h2>
+        <h3>초미세먼지 현황</h3>
+        <button onclick = "q1()">업데이트</button>
+        <u1 id = "names-q1">
+
+        </u1>
+    </div>
+
+    <Script>
+        function q1(){
+        $.ajax({
+            type: "GET",
+            url: "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99",
+            data: {},
+            success: function(response){
+                $("#names-q1").empty();
+                let mise = response["RealtimeCityAir"]["row"];
+
+                
+                    //let gu_name = mise[1]["MSRSTE_NM"];
+                    let gu_mise = mise[1]["PM25"];
+                
+                    let str_mise = ``;
+                
+                    str_mise =  <p5>${gu_mise}㎛</p5>;     
+                    
+                
+                    $("#names-q1").append(str_mise);
+                
+                console.log(response)
+            }
+        })
+    }
+    </Script>
+</body>
+</html>

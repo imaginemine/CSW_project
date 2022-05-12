@@ -15,3 +15,9 @@ https://github.com/PQ777/test1
 <img width="634" alt="1" src="https://user-images.githubusercontent.com/102477933/168003462-34bc5f89-41de-41f4-a63f-19e034a6bf6f.PNG">
 
 <img width="629" alt="2" src="https://user-images.githubusercontent.com/102477933/168003472-8f079a4b-3899-433d-a11a-cd4a6efc2cd1.PNG">
+
+
+<img width="561" alt="3" src="https://user-images.githubusercontent.com/102477933/168004234-ca0e95eb-342e-4225-aca1-a5f1258ad15d.PNG">
+
+
+<img width="460" alt="4" src="https://user-images.githubusercontent.com/102477933/168004245-a62aa3ed-d5b1-47fa-b2ba-a70d6ddc8f41.PNG">

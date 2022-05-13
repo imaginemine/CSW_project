@@ -55,3 +55,17 @@
 {
     margin-bottom: 80px;
 }
+
+.good_air_color
+{
+    color:skyblue;
+}
+.middle_air_color
+{
+    color:greenyellow;
+}
+
+.bad_air_color
+{
+    color:red
+}

@@ -56,9 +56,13 @@
 
 <div align="center" class = "displaydata" style = "border: 5px solid skyblue; padding: 10px; color: black;">
     <form action = "https://earth.nullschool.net/ko/#current/chem/surface/level/overlay=no2/orthographic=-232.76,36.36,7096/loc=126.914,35.605">
-        <button type="submit" class="button_image"><img src="./image/no2.jpg"style width="100px;height:100px"><br>실내<br>이산화질소<br>농도: <h5 id = "Y"></h5></button>
+        <button type="submit" class="button_image"><img src="./image/co.jpg"style width="100px;height:100px"><br>실내<br>일산화탄소<br>농도: <h8 id = "CO"></h8></button>
      </form>
-     <button id="autoclick2" onclick = "q2()" type="submit" class="button_image"><img src="./image/no2.jpg"style width="100px;height:100px"><br>실외<br>이산화질소<br>농도: <p5 id = "names-q2"></p5></button>
+     <button id="autoclick2" onclick = "q3()" type="submit" class="button_image"><img src="./image/co.jpg"style width="100px;height:100px"><br>실외<br>일산화탄소<br>농도: <p5 id = "names-q3"></p5></button>
+     <br>
+     <p3 id = "Message_CO_2"></p3>
+     <br>
+     <p3 id = "Message_CO"></p3>
 </div>
 <br>
 <!--<hr class = "data-line">-->               
@@ -67,9 +71,9 @@
     <form action = "https://earth.nullschool.net/ko/#current/chem/surface/level/overlay=co2sc/orthographic=-232.76,36.36,7096/loc=126.914,35.605">
         <button type="submit" class="button_image"><img src="./image/co2.jpg"style width="100px;height:100px"><br>실내<br>이산화탄소<br>농도: <p8 id = "CO2"></p8></button>
      </form>
-     <button id="autoclick3" onclick = "q3()" type="submit" class="button_image"><img src="./image/co2.jpg"style width="100px;height:100px"><br>실외<br>이산화탄소<br>농도: <p5 id = "names-q3"></p5></button>
+     <button id="autoclick3" onclick = "q2()" type="submit" class="button_image"><img src="./image/co2.jpg"style width="100px;height:100px"><br>실외<br>이산화탄소<br>농도: <p5 id = "names-q2"></p5></button>
      <br>
-     <p3 id = "Message_CO22"></p3>
+     <p3 id = "Message_CO2_2"></p3>
      <br>
      <p3 id = "Message_CO2"></p3>
 </div>
@@ -99,10 +103,12 @@
                     var CO2 = snapshot.val().CO2;
                     var O3 = snapshot.val().O3;
                     var PM = snapshot.val().PM;
+                    var CO = snapshot.val().CO;
                    
                     document.getElementById("CO2").innerHTML = CO2+'ppm';
                     document.getElementById("O3").innerHTML = O3+'ppm';
                     document.getElementById("PM").innerHTML = PM+'㎛';
+                    document.getElementById("CO").innerHTML = CO+'ppm';
                     
                     
                 }
@@ -144,6 +150,19 @@
                     else
                     {
                         document.getElementById("Message_CO2").innerHTML ='실내 이산화탄소가 나쁨('+ CO2+'ppm)이상입니다.<br> 환시시켜주세요.';
+                    }
+
+                    if(CO < 2)
+                    {
+                        document.getElementById("Message_CO").innerHTML ='실내 일산화탄소가 좋음('+ CO+'ppm)입니다.';
+                    }
+                    else if(2.1 < CO && CO < 9 )
+                    {
+                        document.getElementById("Message_CO").innerHTML ='실내 일산화탄소가 보통('+ CO+'ppm)입니다.<br> 호흡기질환 및 노년층분들은 주의해주세요.';
+                    }
+                    else
+                    {
+                        document.getElementById("Message_CO").innerHTML ='실내 일산화탄소가 나쁨('+ CO+'ppm)이상입니다.<br> 환시시켜주세요.';
                     }
             })
         </script>
@@ -210,6 +229,8 @@
                 
             
                 $("#names-q2").append(str_mise);
+
+                document.getElementById("Message_CO2_2").innerHTML ='실외 이산화탄소는('+str_mise+')입니다';
             
             console.log(response)
         }
@@ -238,7 +259,7 @@
             
                 $("#names-q3").append(str_mise);
 
-                document.getElementById("Message_CO22").innerHTML ='실외 이산화탄소는('+str_mise+')입니다';
+                document.getElementById("Message_CO_2").innerHTML ='실외 일산화탄소는('+str_mise+')입니다';
             
             console.log(response)
         }

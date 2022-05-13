@@ -21,3 +21,7 @@ https://github.com/PQ777/test1
 
 
 <img width="460" alt="4" src="https://user-images.githubusercontent.com/102477933/168004245-a62aa3ed-d5b1-47fa-b2ba-a70d6ddc8f41.PNG">
+
+
+22/05/13
+1. 아두이노에서 받아와 파이어베이스 실시간데이터베이스 연동 후 실시간 저장 후 모든 센서 값(초미세먼지, 일산화탄소, 이산화탄소, 오존) 웹에 정상 출력

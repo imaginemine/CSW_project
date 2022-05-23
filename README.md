@@ -35,5 +35,7 @@ https://github.com/PQ777/test1
 22/05/23
 1. 파이어베이스 실시간데이터베이스에서 과거데이터(push) 불러와 웹에 표시
 및 아두이노에서 파이어베이스 실시간데이터베이스 현제 시간 출력 / 과거데이터(push) 표시 및 출력
+![1](https://user-images.githubusercontent.com/102477933/169802464-87974488-4c2f-4940-928c-893d43f4b1ff.jpg)
+
 
 

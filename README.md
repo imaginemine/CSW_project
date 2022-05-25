@@ -42,4 +42,11 @@ https://github.com/PQ777/test1
 1. 공기질 값에 따라 과거 데이터 및 현제 데이터 색상 자동 변경 수정
 및 창 인터페이스 숨기기,보이기 기능 추가
 
+![1](https://user-images.githubusercontent.com/102477933/170295630-f1d6d237-e010-4e4d-9453-a208d6b5783f.jpg)
+
+![2](https://user-images.githubusercontent.com/102477933/170295675-c4eb6d5c-ce40-49a6-a574-1adf15dbc793.jpg)
+
+![3](https://user-images.githubusercontent.com/102477933/170295699-dfbf81b2-a030-4169-8630-93f5d48cf041.jpg)
+
+
 

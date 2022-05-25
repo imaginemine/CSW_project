@@ -8,6 +8,7 @@
     <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-3.4.1.min.js"></script>
     <script type = "text/javascript" src = "db/app.js"></script>
 	<!--Google Login정보 js-->
     <script type = "text/javascript" src = "googleLogin.js"></script> 
@@ -20,6 +21,7 @@
     <style type="text/css">
         .my-box {border: 3px solid blue; padding: 10px}
     </style>
+
 </head>
  
 <h1 class="data-title"><img src = "" style width="100px;height:100px">공기질확인</h1>
@@ -29,12 +31,12 @@
             <form action = "/html/tutorial.html">
                 <button type="submit" class="button_image">사용방법</button>
             </form>
-            <form action = "/db/db.html">
+            <!-- <form action = "/db/db.html">
                 <button type="submit" class="button_image">센서값DB 확인</button>
             </form>
             <form action = "/public_data/public_data_air.html">
                 <button type="submit" class="button_image">공공데이터 확인</button>
-            </form>
+            </form> -->
         </div>           
             
     </div>
@@ -44,29 +46,81 @@
 <br/>
 
 <div align="center" class = "displaydata" style = "border: 5px solid skyblue; padding: 10px; color: black;">
-    <form action = "https://earth.nullschool.net/ko/#current/particulates/surface/level/overlay=pm2.5/orthographic=-232.76,36.76,5764/loc=126.920,35.638">
-        <button type="submit" class="button_image"><img src="./image/pm25.jpg"style width="100px;height:100px"><br>실내<br>초미세먼지<br>농도: <p8 id = "PM"></p8><br>측정시간: <p8 id = "datetime"></p8></button>
+    <form action = "./PM_last_page.html">
+        <button type="submit" class="button_image"><br>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+            <canvas id="bar-chart-horizontal_0" width="240" height="120"></canvas>
+             <!-- 초미세먼지: <p8 id = "PM"></p8><br>
+            시간: <p8 id = "datetime"></p8>  -->
+            <p3 id = "datetime_last_0_message"></p3>
+        </button>
+
+        
  
     </form>
-    <div class = "my-box">
-        측정시간: <p4 id = "datetime_last"></p4><br>농도: <p3 id = "PM_last"></p3>㎛<br>
-        측정시간: <p4 id = "datetime_last_2"></p4><br>농도: <p3 id = "PM_last_2"></p3>㎛<br>
-        측정시간: <p4 id = "datetime_last_3"></p4><br>농도: <p3 id = "PM_last_3"></p3>㎛<br> 
-
-    </div>
+    <div>
+        <button id = "goodsShowBtn">데이터 보이기</button>
+        <button id="goodsHideBtn">데이터 숨기기</button>
+        <div class = "my-box" id = "goodsShowDiv">
     
+            측정시간: <p4 id = "datetime_last"></p4><br>농도: <p3 id = "PM_last"></p3>㎛<br>
+            측정시간: <p4 id = "datetime_last_2"></p4><br>농도: <p3 id = "PM_last_2"></p3>㎛<br>
+            측정시간: <p4 id = "datetime_last_3"></p4><br>농도: <p3 id = "PM_last_3"></p3>㎛<br> 
+            측정시간: <p4 id = "datetime_last_0"></p4><br>농도: <p3 id = "PM_last_0"></p3>㎛<br> 
+    </div>
+    </div>
+
+    <script>
+    $('#goodsShowBtn').click(function() {
+    $("#goodsShowDiv").show();
+        // goodsBtn을 클릭하면 goodsDiv를 보여줘라
+})
+    </script>
+
+    <script>
+
+
+    $('#goodsHideBtn').click(function() {
+    $("#goodsShowDiv").hide();
+    // goodsBtn을 클릭하면 goodsDiv를 숨겨라
+
+    })
+    </script>
+
+    <div>
+        <button id = "goodsShowBtn2">그래프 보이기</button>
+        <button id="goodsHideBtn2">그래프 숨기기</button>
+        <div id = "goodsShowDiv2">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <canvas id="bar-chart-horizontal" width="370" height="120"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <canvas id="bar-chart-horizontal_2" width="370" height="120"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <canvas id="bar-chart-horizontal_3" width="370" height="120"></canvas>
+    </div>
+    </div>
 
+    <script>
+        $('#goodsShowBtn2').click(function() {
+        $("#goodsShowDiv2").show();
+            // goodsBtn을 클릭하면 goodsDiv를 보여줘라
+    })
+        </script>
+    
+        <script>
+    
+    
+        $('#goodsHideBtn2').click(function() {
+        $("#goodsShowDiv2").hide();
+        // goodsBtn을 클릭하면 goodsDiv를 숨겨라
+    
+        })
+        </script>
+   
 
     <!-- <button id="autoclick1" onclick = "q1()" type="submit" class="button_image"><img src="./image/pm25.jpg"style width="100px;height:100px"><br>실외<br>초미세먼지<br>농도: <p5 id = "names-q1"></p5></button>-->
  
-    <br>
-    <p3 id = "Message_PM2"></p3>
+
     <br>
     <p3 id = "Message_PM"></p3> 
 
@@ -76,13 +130,18 @@
 
 <div align="center" class = "displaydata" style = "border: 5px solid skyblue; padding: 10px; color: black;">
     <form action = "https://earth.nullschool.net/ko/#current/chem/surface/level/overlay=no2/orthographic=-232.76,36.36,7096/loc=126.914,35.605">
-        <button type="submit" class="button_image"><img src="./image/co.jpg"style width="100px;height:100px"><br>실내<br>일산화탄소<br>농도: <h8 id = "CO"></h8><br>측정시간: <p8 id = "datetime_2"></p8></button>
+        <button type="submit" class="button_image">
+             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+            <canvas id="bar-chart-horizontal_02" width="240" height="120"></canvas>
+
+        </button>
      </form>
      
      <div class = "my-box">
         측정시간: <p4 id = "datetime_last_4"></p4><br>농도: <p3 id = "CO_last"></p3>ppm<br>
         측정시간: <p4 id = "datetime_last_5"></p4><br>농도: <p3 id = "CO_last_2"></p3>ppm<br>
         측정시간: <p4 id = "datetime_last_6"></p4><br>농도: <p3 id = "CO_last_3"></p3>ppm<br> 
+         측정시간: <p4 id = "datetime_last_02"></p4><br>농도: <p3 id = "CO_last_02"></p3>ppm<br> 
 
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
@@ -91,6 +150,7 @@
     <canvas id="bar-chart-horizontal_5" width="370" height="120"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <canvas id="bar-chart-horizontal_6" width="370" height="120"></canvas>
+    
 
      <br>
      <p3 id = "Message_CO_2"></p3>
@@ -102,13 +162,18 @@
             
 <div align="center" class = "displaydata" style = "border: 5px solid skyblue; padding: 10px; color: black;">
     <form action = "https://earth.nullschool.net/ko/#current/chem/surface/level/overlay=co2sc/orthographic=-232.76,36.36,7096/loc=126.914,35.605">
-        <button type="submit" class="button_image"><img src="./image/co2.jpg"style width="100px;height:100px"><br>실내<br>이산화탄소<br>농도: <p8 id = "CO2"></p8></button>
+        <button type="submit" class="button_image">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+            <canvas id="bar-chart-horizontal_03" width="240" height="120"></canvas>
+
+        </button>
      </form>
      
      <div class = "my-box">
-        <p4>90분전:</p3> <p3 id = "CO2_last"></p3>ppm<br>
-        <p4>60분전:</p4> <p3 id = "CO2_last_2"></p3>ppm<br>
-        <p4>30분전:</p4> <p3 id = "CO2_last_3"></p3>ppm<br> 
+        측정시간: <p4 id = "datetime_last_7"></p4><br>농도: <p3 id = "CO2_last"></p3>ppm<br>
+        측정시간: <p4 id = "datetime_last_8"></p4><br>농도: <p3 id = "CO2_last_2"></p3>ppm<br>
+        측정시간: <p4 id = "datetime_last_9"></p4><br>농도: <p3 id = "CO2_last_3"></p3>ppm<br> 
+        측정시간: <p4 id = "datetime_last_03"></p4><br>농도: <p3 id = "CO2_last_03"></p3>ppm<br> 
 
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
@@ -128,13 +193,18 @@
 
 <div align="center" class = "displaydata" style = "border: 5px solid skyblue; padding: 10px; color: black;">
      <form action = "https://earth.nullschool.net/ko/#current/chem/surface/level/overlay=co2sc/orthographic=-232.51,36.27,11746/loc=74.905,29.679">
-         <button type="submit" class="button_image"><img src="./image/o3.jpg"style width="100px;height:100px"><br>실내<br>오존<br>농도: <p8 id = "O3"></p8></button>
+         <button type="submit" class="button_image">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+            <canvas id="bar-chart-horizontal_04" width="240" height="120"></canvas>
+
+         </button>
     </form>
     
     <div class = "my-box">
-        <p4>90분전:</p3> <p3 id = "O3_last"></p3>ppm<br>
-        <p4>60분전:</p4> <p3 id = "O3_last_2"></p3>ppm<br>
-        <p4>30분전:</p4> <p3 id = "O3_last_3"></p3>ppm<br> 
+        측정시간: <p4 id = "datetime_last_10"></p4><br>농도: <p3 id = "O3_last"></p3>ppm<br>
+        측정시간: <p4 id = "datetime_last_11"></p4><br>농도: <p3 id = "O3_last_2"></p3>ppm<br>
+        측정시간: <p4 id = "datetime_last_12"></p4><br>농도: <p3 id = "O3_last_3"></p3>ppm<br> 
+        측정시간: <p4 id = "datetime_last_04"></p4><br>농도: <p3 id = "O3_last_04"></p3>ppm<br> 
 
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
@@ -176,14 +246,21 @@
                     //     document.getElementById('PM').innerHTML = PM;
                     // }
 
+
+                        
+                        if(PM_last <= 15)
+                        {
+
+                          
                         new Chart(document.getElementById("bar-chart-horizontal"), {
+                        
                         type: 'horizontalBar',
                         data: {
                         labels: [datetime_last],
-                        datasets: [
+                        datasets: [ 
                             {
                             //label: "Population (millions)",
-                            backgroundColor: ["#3e95cd"],
+                            backgroundColor: ["#87ceeb"],
                             data: [PM_last]
                             }
                         ]
@@ -205,7 +282,86 @@
                         }
                         }
                     });
-                });
+                }
+
+                    else if(PM_last > 15 && PM_last < 36)
+                        {
+
+                          
+                        new Chart(document.getElementById("bar-chart-horizontal"), {
+                        
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last],
+                        datasets: [ 
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#adff2f"],
+                            data: [PM_last]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 100,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '초미세먼지'
+                        }
+                        }
+                    });
+                    
+                    
+                }
+                
+                    else
+                        {
+
+                          
+                        new Chart(document.getElementById("bar-chart-horizontal"), {
+                        
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last],
+                        datasets: [ 
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#ff0000"],
+                            data: [PM_last]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 100,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '초미세먼지'
+                        }
+                        }
+                    });
+                    
+                    
+                }
+            
+            });
+                 
 
                 firebase.database().ref('airQuality/2-pushJSON/').limitToLast(3).on('child_added', function(snapshot){
                     //console.log(snapshot.child("PM").val())
@@ -215,7 +371,8 @@
                     document.getElementById('PM_last_2').outerText = PM_last_2;
                     document.getElementById('datetime_last_2').outerText = datetime_last_2;
 
-
+                    if(PM_last_2 <= 15)
+                    {
                     new Chart(document.getElementById("bar-chart-horizontal_2"), {
                         type: 'horizontalBar',
                         data: {
@@ -223,7 +380,7 @@
                         datasets: [
                             {
                             //label: "Population (millions)",
-                            backgroundColor: ["#3e95cd"],
+                            backgroundColor: ["#87ceeb"],
                             data: [PM_last_2]
                             }
                         ]
@@ -241,10 +398,76 @@
                         },
                         title: {
                             display: true,
-                            //text: 'Predicted world population (millions) in 2050'
+                            text: '초미세먼지'
                         }
                         }
                     });
+                }
+                else if((PM_last_2 > 15) && (PM_last_2 < 36))
+                    {
+                    new Chart(document.getElementById("bar-chart-horizontal_2"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_2],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#adff2f"],
+                            data: [PM_last_2]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 100,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '초미세먼지'
+                        }
+                        }
+                    });
+                }
+
+                else 
+                    {
+                    new Chart(document.getElementById("bar-chart-horizontal_2"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_2],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#ff0000"],
+                            data: [PM_last_2]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 100,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '초미세먼지'
+                        }
+                        }
+                    });
+                }
 
 
                 });
@@ -257,6 +480,8 @@
             document.getElementById('PM_last_3').outerText = PM_last_3;
             document.getElementById('datetime_last_3').outerText = datetime_last_3;
 
+            if(PM_last_3 <= 15)
+            {
             new Chart(document.getElementById("bar-chart-horizontal_3"), {
                         type: 'horizontalBar',
                         data: {
@@ -264,7 +489,7 @@
                         datasets: [
                             {
                             //label: "Population (millions)",
-                            backgroundColor: ["#3e95cd"],
+                            backgroundColor: ["#87ceeb"],
                             data: [PM_last_3]
                             }
                         ]
@@ -282,10 +507,187 @@
                         },
                         title: {
                             display: true,
-                            //text: 'Predicted world population (millions) in 2050'
+                            text: '초미세먼지'
                         }
                         }
                     });
+                }
+
+                else if(PM_last_3 >15 && PM_last_3 < 36)
+            {
+            new Chart(document.getElementById("bar-chart-horizontal_3"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_3],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#adff2f"],
+                            data: [PM_last_3]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 100,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '초미세먼지'
+                        }
+                        }
+                    });
+                }
+
+                else
+            {
+            new Chart(document.getElementById("bar-chart-horizontal_3"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_3],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#ff0000"],
+                            data: [PM_last_3]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 100,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                        text: '초미세먼지'
+                        }
+                        }
+                    });
+                }
+
+        });
+
+        firebase.database().ref('airQuality/2-pushJSON/').limitToLast(1).on('child_added', function(snapshot){
+            //console.log(snapshot.child("PM").val())
+            var PM_last_0 = snapshot.child("PM").val();
+            var datetime_last_0 = snapshot.child("datetime").val();
+
+            document.getElementById('PM_last_0').outerText = PM_last_0;
+            document.getElementById('datetime_last_0').outerText = datetime_last_0;
+
+            if(PM_last_0 <= 15)
+            {
+            new Chart(document.getElementById("bar-chart-horizontal_0"), {
+                        type: 'bar',
+                        data: {
+                        labels: [datetime_last_0],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#87ceeb"],
+                            data: [PM_last_0]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 100,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '초미세먼지'
+                        }
+                        }
+                    });
+                    document.getElementById('datetime_last_0_message').outerText = "초미세먼지 좋음";
+                }
+
+                else if(PM_last_0 >15 && PM_last_0 < 36)
+            {
+            new Chart(document.getElementById("bar-chart-horizontal_0"), {
+                        type: 'bar',
+                        data: {
+                        labels: [datetime_last_0],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#adff2f"],
+                            data: [PM_last_0]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 100,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '초미세먼지'
+                        }
+                        }
+                    });
+                }
+
+                else
+            {
+            new Chart(document.getElementById("bar-chart-horizontal_0"), {
+                        type: 'bar',
+                        data: {
+                        labels: [datetime_last_0],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#ff0000"],
+                            data: [PM_last_0]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 100,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                        text: '초미세먼지'
+                        }
+                        }
+                    });
+                }
 
         });
 
@@ -313,6 +715,8 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                     //     document.getElementById('PM').innerHTML = PM;
                     // }
 
+                        if(CO_last <= 2)
+                        {
                         new Chart(document.getElementById("bar-chart-horizontal_4"), {
                         type: 'horizontalBar',
                         data: {
@@ -320,7 +724,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                         datasets: [
                             {
                             //label: "Population (millions)",
-                            backgroundColor: ["#3e95cd"],
+                            backgroundColor: ["#87ceeb"],
                             data: [CO_last]
                             }
                         ]
@@ -342,6 +746,73 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                         }
                         }
                     });
+                }
+
+                else if(CO_last > 2 && CO_last < 10)
+                        {
+                        new Chart(document.getElementById("bar-chart-horizontal_4"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_4],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#adff2f"],
+                            data: [CO_last]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 15.1,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '일산화탄소'
+                        }
+                        }
+                    });
+                }
+
+                else
+                        {
+                        new Chart(document.getElementById("bar-chart-horizontal_4"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_4],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#ff0000"],
+                            data: [CO_last]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 15.1,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '일산화탄소'
+                        }
+                        }
+                    });
+                }
                 });
 
                 firebase.database().ref('airQuality/2-pushJSON/').limitToLast(3).on('child_added', function(snapshot){
@@ -349,6 +820,8 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                     var CO_last_2 = snapshot.child("CO").val();
                     var datetime_last_5 = snapshot.child("datetime").val();
 
+                    if(CO_last_2 <= 2)
+                    {
                     document.getElementById('CO_last_2').outerText = CO_last_2;
                     document.getElementById('datetime_last_5').outerText = datetime_last_5;
 
@@ -359,7 +832,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                         datasets: [
                             {
                             //label: "Population (millions)",
-                            backgroundColor: ["#3e95cd"],
+                            backgroundColor: ["#87ceeb"],
                             data: [CO_last_2]
                             }
                         ]
@@ -377,11 +850,83 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                         },
                         title: {
                             display: true,
-                            //text: 'Predicted world population (millions) in 2050'
+                            text: '일산화탄소'
                         }
                         }
                     });
+                }
 
+                else if(CO_last_2  > 2 && CO_last_2 < 10)
+                    {
+                    document.getElementById('CO_last_2').outerText = CO_last_2;
+                    document.getElementById('datetime_last_5').outerText = datetime_last_5;
+
+                    new Chart(document.getElementById("bar-chart-horizontal_5"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_5],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#adff2f"],
+                            data: [CO_last_2]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 15.1,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '일산화탄소'
+                        }
+                        }
+                    });
+                }
+
+                else
+                    {
+                    document.getElementById('CO_last_2').outerText = CO_last_2;
+                    document.getElementById('datetime_last_5').outerText = datetime_last_5;
+
+                    new Chart(document.getElementById("bar-chart-horizontal_5"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_5],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#ff0000"],
+                            data: [CO_last_2]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 15.1,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '일산화탄소'
+                        }
+                        }
+                    });
+                }
 
                 });
 
@@ -393,6 +938,8 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
             document.getElementById('CO_last_3').outerText = CO_last_3;
             document.getElementById('datetime_last_6').outerText = datetime_last_6;
 
+            if(CO_last_3 <=2)
+            {
             new Chart(document.getElementById("bar-chart-horizontal_6"), {
                         type: 'horizontalBar',
                         data: {
@@ -400,7 +947,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                         datasets: [
                             {
                             //label: "Population (millions)",
-                            backgroundColor: ["#3e95cd"],
+                            backgroundColor: ["#87ceeb"],
                             data: [CO_last_3]
                             }
                         ]
@@ -418,11 +965,185 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                         },
                         title: {
                             display: true,
-                            //text: 'Predicted world population (millions) in 2050'
+                            text: '일산화탄소'
                         }
                         }
                     });
+                }
 
+                else if(CO_last_3 > 2 && CO_last_3 < 10)
+            {
+            new Chart(document.getElementById("bar-chart-horizontal_6"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_6],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#adff2f"],
+                            data: [CO_last_3]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 15.1,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '일산화탄소'
+                        }
+                        }
+                    });
+                }
+
+                else
+            {
+            new Chart(document.getElementById("bar-chart-horizontal_6"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_6],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#ff0000"],
+                            data: [CO_last_3]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 15.1,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '일산화탄소'
+                        }
+                        }
+                    });
+                }
+        });
+
+        firebase.database().ref('airQuality/2-pushJSON/').limitToLast(1).on('child_added', function(snapshot){
+            //console.log(snapshot.child("PM").val())
+            var CO_last_02 = snapshot.child("CO").val();
+            var datetime_last_02 = snapshot.child("datetime").val();
+
+            document.getElementById('CO_last_02').outerText = CO_last_02;
+            document.getElementById('datetime_last_02').outerText = datetime_last_02;
+
+            if(CO_last_02 <=2)
+            {
+            new Chart(document.getElementById("bar-chart-horizontal_02"), {
+                        type: 'bar',
+                        data: {
+                        labels: [datetime_last_0],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#87ceeb"],
+                            data: [CO_last_0]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 15.1,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '일산화탄소'
+                        }
+                        }
+                    });
+                }
+
+                else if(CO_last_02 > 2 && CO_last_02 < 10)
+            {
+            new Chart(document.getElementById("bar-chart-horizontal_02"), {
+                        type: 'bar',
+                        data: {
+                        labels: [datetime_last_02],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#adff2f"],
+                            data: [CO_last_02]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 15.1,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '일산화탄소'
+                        }
+                        }
+                    });
+                }
+
+                else
+            {
+            new Chart(document.getElementById("bar-chart-horizontal_02"), {
+                        type: 'bar',
+                        data: {
+                        labels: [datetime_last_02],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#ff0000"],
+                            data: [CO_last_02]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 15.1,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '일산화탄소'
+                        }
+                        }
+                    });
+                }
         });
 
         </script>
@@ -433,13 +1154,12 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
     firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added', function(snapshot){
                         //console.log(snapshot.child("PM").val())
                         var CO2_last = snapshot.child("CO2").val();
+                        var datetime_last_7 = snapshot.child("datetime").val();
 
 
                         document.getElementById('CO2_last').outerText = CO2_last;
+                        document.getElementById('datetime_last_7').outerText = datetime_last_7;
 
-                        
-                        
-    
                         //document.write(PM_last + "<br>");
     
     
@@ -451,14 +1171,16 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                         //     document.getElementById('PM').innerHTML = PM;
                         // }
     
+                            if(CO2_last <= 450)
+                            {
                             new Chart(document.getElementById("bar-chart-horizontal_7"), {
                             type: 'horizontalBar',
                             data: {
-                            labels: ["90분전"],
+                            labels: [datetime_last_7],
                             datasets: [
                                 {
                                 //label: "Population (millions)",
-                                backgroundColor: ["#3e95cd"],
+                                backgroundColor: ["#87ceeb"],
                                 data: [CO2_last]
                                 }
                             ]
@@ -480,22 +1202,94 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             }
                             }
                         });
+                    }
+
+                    else if(CO_last > 450 && CO_last < 1001)
+                            {
+                            new Chart(document.getElementById("bar-chart-horizontal_7"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_7],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#adff2f"],
+                                data: [CO2_last]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 1000,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '이산화탄소'
+                            }
+                            }
+                        });
+                    }
+
+                    else
+                            {
+                            new Chart(document.getElementById("bar-chart-horizontal_7"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_7],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#ff0000"],
+                                data: [CO2_last]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 1000,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '이산화탄소'
+                            }
+                            }
+                        });
+                    }
                     });
     
                     firebase.database().ref('airQuality/2-pushJSON/').limitToLast(3).on('child_added', function(snapshot){
                         //console.log(snapshot.child("PM").val())
                         var CO2_last_2 = snapshot.child("CO2").val();
-    
+                        var datetime_last_8 = snapshot.child("datetime").val();
+
+
                         document.getElementById('CO2_last_2').outerText = CO2_last_2;
-    
+                        document.getElementById('datetime_last_8').outerText = datetime_last_8;
+
+                        if(CO2_last_2 <= 450)
+                        {
                         new Chart(document.getElementById("bar-chart-horizontal_8"), {
                             type: 'horizontalBar',
                             data: {
-                            labels: ["60분전"],
+                            labels: [datetime_last_8],
                             datasets: [
                                 {
                                 //label: "Population (millions)",
-                                backgroundColor: ["#3e95cd"],
+                                backgroundColor: ["#87ceeb"],
                                 data: [CO2_last_2]
                                 }
                             ]
@@ -513,28 +1307,98 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                         },
                             title: {
                                 display: true,
-                                //text: 'Predicted world population (millions) in 2050'
+                                text: '이산화탄소'
                             }
                             }
                         });
-    
+                    }
+
+                    else if(CO2_last_2 > 451 && CO2_last_2 < 1001)
+                        {
+                        new Chart(document.getElementById("bar-chart-horizontal_8"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_8],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#adff2f"],
+                                data: [CO2_last_2]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 1000,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '이산화탄소'
+                            }
+                            }
+                        });
+                    }
+
+                    else
+                        {
+                        new Chart(document.getElementById("bar-chart-horizontal_8"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_8],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#ff0000"],
+                                data: [CO2_last_2]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 1000,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '이산화탄소'
+                            }
+                            }
+                        });
+                    }
     
                     });
     
                     firebase.database().ref('airQuality/2-pushJSON/').limitToLast(2).on('child_added', function(snapshot){
                 //console.log(snapshot.child("PM").val())
                 var CO2_last_3 = snapshot.child("CO2").val();
+                var datetime_last_9 = snapshot.child("datetime").val();
     
                 document.getElementById('CO2_last_3').outerText = CO2_last_3;
+                document.getElementById('datetime_last_9').outerText = datetime_last_9;
     
+                if(CO2_last_3 <= 450)
+                {
                 new Chart(document.getElementById("bar-chart-horizontal_9"), {
                             type: 'horizontalBar',
                             data: {
-                            labels: ["30분전"],
+                            labels: [datetime_last_9],
                             datasets: [
                                 {
                                 //label: "Population (millions)",
-                                backgroundColor: ["#3e95cd"],
+                                backgroundColor: ["#87ceeb"],
                                 data: [CO2_last_3]
                                 }
                             ]
@@ -552,11 +1416,185 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                         },
                             title: {
                                 display: true,
-                                //text: 'Predicted world population (millions) in 2050'
+                                text: '이산화탄소'
                             }
                             }
                         });
+                    }
+
+                    else if(CO2_last_3 > 450 && CO2_last_3 < 1001)
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_9"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_9],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#adff2f"],
+                                data: [CO2_last_3]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 1000,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '이산화탄소'
+                            }
+                            }
+                        });
+                    }
+
+                    else
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_9"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_9],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#ff0000"],
+                                data: [CO2_last_3]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 1000,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '이산화탄소'
+                            }
+                            }
+                        });
+                    }
+            });
+
+            firebase.database().ref('airQuality/2-pushJSON/').limitToLast(1).on('child_added', function(snapshot){
+                //console.log(snapshot.child("PM").val())
+                var CO2_last_03 = snapshot.child("CO2").val();
+                var datetime_last_03 = snapshot.child("datetime").val();
     
+                document.getElementById('CO2_last_03').outerText = CO2_last_03;
+                document.getElementById('datetime_last_03').outerText = datetime_last_03;
+    
+                if(CO2_last_03 <= 450)
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_03"), {
+                            type: 'bar',
+                            data: {
+                            labels: [datetime_last_03],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#87ceeb"],
+                                data: [CO2_last_03]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 1000,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '이산화탄소'
+                            }
+                            }
+                        });
+                    }
+
+                    else if(CO2_last_03 > 450 && CO2_last_03 < 1001)
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_03"), {
+                            type: 'bar',
+                            data: {
+                            labels: [datetime_last_03],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#adff2f"],
+                                data: [CO2_last_03]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 1000,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '이산화탄소'
+                            }
+                            }
+                        });
+                    }
+
+                    else
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_03"), {
+                            type: 'bar',
+                            data: {
+                            labels: [datetime_last_03],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#ff0000"],
+                                data: [CO2_last_03]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 1000,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '이산화탄소'
+                            }
+                            }
+                        });
+                    }
             });
     
             </script>
@@ -567,7 +1605,10 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
     firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added', function(snapshot){
                         //console.log(snapshot.child("PM").val())
                         var O3_last = snapshot.child("O3").val();
+                        var datetime_last_10 = snapshot.child("datetime").val();
+
                         document.getElementById('O3_last').outerText = O3_last;
+                        document.getElementById('datetime_last_10').outerText = datetime_last_10;
                         
                         
     
@@ -582,14 +1623,16 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                         //     document.getElementById('PM').innerHTML = PM;
                         // }
     
+                        if(O3_last <= 0.03)
+                        {
                             new Chart(document.getElementById("bar-chart-horizontal_10"), {
                             type: 'horizontalBar',
                             data: {
-                            labels: ["90분전"],
+                            labels: [datetime_last_10],
                             datasets: [
                                 {
                                 //label: "Population (millions)",
-                                backgroundColor: ["#3e95cd"],
+                                backgroundColor: ["#87ceeb"],
                                 data: [O3_last]
                                 }
                             ]
@@ -611,22 +1654,93 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             }
                             }
                         });
+                    }
+
+                    else if(O3_last > 0.03 && 0.091)
+                        {
+                            new Chart(document.getElementById("bar-chart-horizontal_10"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_10],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#adff2f"],
+                                data: [O3_last]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 0.151,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '오존'
+                            }
+                            }
+                        });
+                    }
+
+
+                    else                        {
+                            new Chart(document.getElementById("bar-chart-horizontal_10"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_10],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#ff0000"],
+                                data: [O3_last]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 0.151,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '오존'
+                            }
+                            }
+                        });
+                    }
                     });
     
                     firebase.database().ref('airQuality/2-pushJSON/').limitToLast(3).on('child_added', function(snapshot){
                         //console.log(snapshot.child("PM").val())
                         var O3_last_2 = snapshot.child("O3").val();
+                        var datetime_last_11 = snapshot.child("datetime").val();
     
                         document.getElementById('O3_last_2').outerText = O3_last_2;
+                        document.getElementById('datetime_last_11').outerText = datetime_last_11;
     
+                        if(O3_last_2 <= 0.03)
+                        {
                         new Chart(document.getElementById("bar-chart-horizontal_11"), {
                             type: 'horizontalBar',
                             data: {
-                            labels: ["60분전"],
+                            labels: [datetime_last_11],
                             datasets: [
                                 {
                                 //label: "Population (millions)",
-                                backgroundColor: ["#3e95cd"],
+                                backgroundColor: ["#87ceeb"],
                                 data: [O3_last_2]
                                 }
                             ]
@@ -644,28 +1758,100 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                         },
                             title: {
                                 display: true,
-                                //text: 'Predicted world population (millions) in 2050'
+                                text: '오존'
                             }
                             }
                         });
     
+                    }
+
+                    else if(O3_last_2 > 0.03 && O3_last_2 < 0.091)
+                        {
+                        new Chart(document.getElementById("bar-chart-horizontal_11"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_11],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#adff2f"],
+                                data: [O3_last_2]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 0.151,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '오존'
+                            }
+                            }
+                        });
     
+                    }
+
+                    else
+                        {
+                        new Chart(document.getElementById("bar-chart-horizontal_11"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_11],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#ff0000"],
+                                data: [O3_last_2]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 0.151,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '오존'
+                            }
+                            }
+                        });
+    
+                    }
                     });
     
                     firebase.database().ref('airQuality/2-pushJSON/').limitToLast(2).on('child_added', function(snapshot){
                 //console.log(snapshot.child("PM").val())
                 var O3_last_3 = snapshot.child("O3").val();
+                var datetime_last_12 = snapshot.child("datetime").val();
     
                 document.getElementById('O3_last_3').outerText = O3_last_3;
+                document.getElementById('datetime_last_12').outerText = datetime_last_12;
     
+                if(O3_last_3 <= 0.03)
+                {
                 new Chart(document.getElementById("bar-chart-horizontal_12"), {
                             type: 'horizontalBar',
                             data: {
-                            labels: ["30분전"],
+                            labels: [datetime_last_12],
                             datasets: [
                                 {
                                 //label: "Population (millions)",
-                                backgroundColor: ["#3e95cd"],
+                                backgroundColor: ["#87ceeb"],
                                 data: [O3_last_3]
                                 }
                             ]
@@ -683,11 +1869,185 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                         },
                             title: {
                                 display: true,
-                                //text: 'Predicted world population (millions) in 2050'
+                                text: '오존'
                             }
                             }
                         });
+                    }
+
+                    else if(O3_last_3 > 0.03 && O3_last_3 < 0.091)
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_12"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_12],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#adff2f"],
+                                data: [O3_last_3]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 0.151,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '오존'
+                            }
+                            }
+                        });
+                    }
+
+                    else
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_12"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_12],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#ff0000"],
+                                data: [O3_last_3]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 0.151,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '오존'
+                            }
+                            }
+                        });
+                    }
+            });
+
+            firebase.database().ref('airQuality/2-pushJSON/').limitToLast(1).on('child_added', function(snapshot){
+                //console.log(snapshot.child("PM").val())
+                var O3_last_04 = snapshot.child("O3").val();
+                var datetime_last_04 = snapshot.child("datetime").val();
     
+                document.getElementById('O3_last_04').outerText = O3_last_04;
+                document.getElementById('datetime_last_04').outerText = datetime_last_04;
+    
+                if(O3_last_04 <= 0.03)
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_04"), {
+                            type: 'bar',
+                            data: {
+                            labels: [datetime_last_04],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#87ceeb"],
+                                data: [O3_last_04]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 0.151,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '오존'
+                            }
+                            }
+                        });
+                    }
+
+                    else if(O3_last_04 > 0.03 && O3_last_04 < 0.091)
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_04"), {
+                            type: 'bar',
+                            data: {
+                            labels: [datetime_last_04],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#adff2f"],
+                                data: [O3_last_04]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 0.151,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '오존'
+                            }
+                            }
+                        });
+                    }
+
+                    else
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_04"), {
+                            type: 'bar',
+                            data: {
+                            labels: [datetime_last_04],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#ff0000"],
+                                data: [O3_last_04]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 0.151,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '오존'
+                            }
+                            }
+                        });
+                    }
             });
     
             </script>
@@ -713,6 +2073,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                     document.getElementById("CO").innerHTML = CO+'ppm';
                     document.getElementById("datetime").innerHTML = datetime;
                     document.getElementById("datetime_2").innerHTML = datetime_2;
+
                     
                     
                 }

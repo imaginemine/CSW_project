@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="120">
+    <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-SERVICE.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
+    <link rel = "stylesheet" href="/css/test.css">
+    <script type = "text/javascript" src = "db/app.js"></script>
+	<!--Google Login정보 js-->
+    <script type = "text/javascript" src = "googleLogin.js"></script> 
+	<!--firebase database js-->
+    <script type = "text/javascript" src = "db/database.js"></script>
+    <title>초미세먼지 데이터</title>
+    <style type="text/css">
+        .my-box {border: 3px solid blue; padding: 10px}
+    </style>
+</head>
+<body>
+
+    <div align="center" class = "displaydata" style = "border: 5px solid skyblue; padding: 10px; color: black;">
+        <form action = "https://earth.nullschool.net/ko/#current/particulates/surface/level/overlay=pm2.5/orthographic=-232.73,36.09,9734/loc=126.878,35.613">
+            <button type="submit" class="button_image"><br>
+                
+            </button>
+    
+    <div class = "my-box">
+        측정시간: <p4 id = "datetime_last"></p4><br>농도: <p3 id = "PM_last"></p3>㎛<br>
+        측정시간: <p4 id = "datetime_last_2"></p4><br>농도: <p3 id = "PM_last_2"></p3>㎛<br>
+        측정시간: <p4 id = "datetime_last_3"></p4><br>농도: <p3 id = "PM_last_3"></p3>㎛<br> 
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <canvas id="bar-chart-horizontal" width="370" height="120"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <canvas id="bar-chart-horizontal_2" width="370" height="120"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <canvas id="bar-chart-horizontal_3" width="370" height="120"></canvas>
+
+
+    
+
+
+    <script>
+
+        firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added', function(snapshot){
+                //console.log(snapshot.child("PM").val())
+                var PM_last = snapshot.child("PM").val();
+                var datetime_last = snapshot.child("datetime").val();
+
+                document.getElementById('PM_last').outerText = PM_last;
+                document.getElementById('datetime_last').outerText = datetime_last;
+                
+                
+
+                //document.write(PM_last + "<br>");
+
+
+                // for(var i in snapshot.val()){
+                //     document.write(i +" : " + snapshot.val()[i] + "<br>" + "<br>")
+
+                //     var PM = snapshot.val()[i].PM;
+
+                //     document.getElementById('PM').innerHTML = PM;
+                // }
+
+
+                    
+                    if(PM_last <= 15)
+                    {
+
+                      
+                    new Chart(document.getElementById("bar-chart-horizontal"), {
+                    
+                    type: 'horizontalBar',
+                    data: {
+                    labels: [datetime_last],
+                    datasets: [ 
+                        {
+                        //label: "Population (millions)",
+                        backgroundColor: ["#87ceeb"],
+                        data: [PM_last]
+                        }
+                    ]
+                    },
+                    options: {
+                        responsive: false,
+                    legend: { display: false },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                suggestedMin: 0,
+                                suggestedMax: 100,
+                            }
+                        }]
+                    },
+                    title: {
+                        display: true,
+                        text: '초미세먼지'
+                    }
+                    }
+                });
+            }
+
+                else if(PM_last > 15 && PM_last < 36)
+                    {
+
+                      
+                    new Chart(document.getElementById("bar-chart-horizontal"), {
+                    
+                    type: 'horizontalBar',
+                    data: {
+                    labels: [datetime_last],
+                    datasets: [ 
+                        {
+                        //label: "Population (millions)",
+                        backgroundColor: ["#adff2f"],
+                        data: [PM_last]
+                        }
+                    ]
+                    },
+                    options: {
+                        responsive: false,
+                    legend: { display: false },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                suggestedMin: 0,
+                                suggestedMax: 100,
+                            }
+                        }]
+                    },
+                    title: {
+                        display: true,
+                        text: '초미세먼지'
+                    }
+                    }
+                });
+                
+                
+            }
+            
+                else
+                    {
+
+                      
+                    new Chart(document.getElementById("bar-chart-horizontal"), {
+                    
+                    type: 'horizontalBar',
+                    data: {
+                    labels: [datetime_last],
+                    datasets: [ 
+                        {
+                        //label: "Population (millions)",
+                        backgroundColor: ["#ff0000"],
+                        data: [PM_last]
+                        }
+                    ]
+                    },
+                    options: {
+                        responsive: false,
+                    legend: { display: false },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                suggestedMin: 0,
+                                suggestedMax: 100,
+                            }
+                        }]
+                    },
+                    title: {
+                        display: true,
+                        text: '초미세먼지'
+                    }
+                    }
+                });
+                
+                
+            }
+        
+        });
+             
+
+            firebase.database().ref('airQuality/2-pushJSON/').limitToLast(3).on('child_added', function(snapshot){
+                //console.log(snapshot.child("PM").val())
+                var PM_last_2 = snapshot.child("PM").val();
+                var datetime_last_2 = snapshot.child("datetime").val();
+
+                document.getElementById('PM_last_2').outerText = PM_last_2;
+                document.getElementById('datetime_last_2').outerText = datetime_last_2;
+
+                if(PM_last_2 <= 15)
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_2"), {
+                    type: 'horizontalBar',
+                    data: {
+                    labels: [datetime_last_2],
+                    datasets: [
+                        {
+                        //label: "Population (millions)",
+                        backgroundColor: ["#87ceeb"],
+                        data: [PM_last_2]
+                        }
+                    ]
+                    },
+                    options: {
+                        responsive: false,
+                    legend: { display: false },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                suggestedMin: 0,
+                                suggestedMax: 100,
+                            }
+                        }]
+                    },
+                    title: {
+                        display: true,
+                        text: '초미세먼지'
+                    }
+                    }
+                });
+            }
+            else if((PM_last_2 > 15) && (PM_last_2 < 36))
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_2"), {
+                    type: 'horizontalBar',
+                    data: {
+                    labels: [datetime_last_2],
+                    datasets: [
+                        {
+                        //label: "Population (millions)",
+                        backgroundColor: ["#adff2f"],
+                        data: [PM_last_2]
+                        }
+                    ]
+                    },
+                    options: {
+                        responsive: false,
+                    legend: { display: false },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                suggestedMin: 0,
+                                suggestedMax: 100,
+                            }
+                        }]
+                    },
+                    title: {
+                        display: true,
+                        text: '초미세먼지'
+                    }
+                    }
+                });
+            }
+
+            else 
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_2"), {
+                    type: 'horizontalBar',
+                    data: {
+                    labels: [datetime_last_2],
+                    datasets: [
+                        {
+                        //label: "Population (millions)",
+                        backgroundColor: ["#ff0000"],
+                        data: [PM_last_2]
+                        }
+                    ]
+                    },
+                    options: {
+                        responsive: false,
+                    legend: { display: false },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                suggestedMin: 0,
+                                suggestedMax: 100,
+                            }
+                        }]
+                    },
+                    title: {
+                        display: true,
+                        text: '초미세먼지'
+                    }
+                    }
+                });
+            }
+
+
+            });
+
+            firebase.database().ref('airQuality/2-pushJSON/').limitToLast(2).on('child_added', function(snapshot){
+        //console.log(snapshot.child("PM").val())
+        var PM_last_3 = snapshot.child("PM").val();
+        var datetime_last_3 = snapshot.child("datetime").val();
+
+        document.getElementById('PM_last_3').outerText = PM_last_3;
+        document.getElementById('datetime_last_3').outerText = datetime_last_3;
+
+        if(PM_last_3 <= 15)
+        {
+        new Chart(document.getElementById("bar-chart-horizontal_3"), {
+                    type: 'horizontalBar',
+                    data: {
+                    labels: [datetime_last_3],
+                    datasets: [
+                        {
+                        //label: "Population (millions)",
+                        backgroundColor: ["#87ceeb"],
+                        data: [PM_last_3]
+                        }
+                    ]
+                    },
+                    options: {
+                        responsive: false,
+                    legend: { display: false },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                suggestedMin: 0,
+                                suggestedMax: 100,
+                            }
+                        }]
+                    },
+                    title: {
+                        display: true,
+                        text: '초미세먼지'
+                    }
+                    }
+                });
+            }
+
+            else if(PM_last_3 >15 && PM_last_3 < 36)
+        {
+        new Chart(document.getElementById("bar-chart-horizontal_3"), {
+                    type: 'horizontalBar',
+                    data: {
+                    labels: [datetime_last_3],
+                    datasets: [
+                        {
+                        //label: "Population (millions)",
+                        backgroundColor: ["#adff2f"],
+                        data: [PM_last_3]
+                        }
+                    ]
+                    },
+                    options: {
+                        responsive: false,
+                    legend: { display: false },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                suggestedMin: 0,
+                                suggestedMax: 100,
+                            }
+                        }]
+                    },
+                    title: {
+                        display: true,
+                        text: '초미세먼지'
+                    }
+                    }
+                });
+            }
+
+            else
+        {
+        new Chart(document.getElementById("bar-chart-horizontal_3"), {
+                    type: 'horizontalBar',
+                    data: {
+                    labels: [datetime_last_3],
+                    datasets: [
+                        {
+                        //label: "Population (millions)",
+                        backgroundColor: ["#ff0000"],
+                        data: [PM_last_3]
+                        }
+                    ]
+                    },
+                    options: {
+                        responsive: false,
+                    legend: { display: false },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                suggestedMin: 0,
+                                suggestedMax: 100,
+                            }
+                        }]
+                    },
+                    title: {
+                        display: true,
+                    text: '초미세먼지'
+                    }
+                    }
+                });
+            }
+
+    });
+
+    </script>
+
+</body>
+</html>
+

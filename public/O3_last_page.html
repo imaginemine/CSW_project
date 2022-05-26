@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="120">
+    <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-SERVICE.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
+    <link rel = "stylesheet" href="/css/test.css">
+    <script type = "text/javascript" src = "db/app.js"></script>
+	<!--Google Login정보 js-->
+    <script type = "text/javascript" src = "googleLogin.js"></script> 
+	<!--firebase database js-->
+    <script type = "text/javascript" src = "db/database.js"></script>
+    <title>오존 데이터</title>
+    <style type="text/css">
+        .my-box {border: 3px solid blue; padding: 10px}
+    </style>
+</head>
+<body>
+    <div align="center" class = "displaydata" style = "border: 5px solid skyblue; padding: 10px; color: black;">
+        <form action = "https://earth.nullschool.net/ko/#current/chem/surface/level/overlay=co2sc/orthographic=-232.03,35.88,10455/loc=126.908,35.683">
+            <button type="submit" class="button_image">오존 널스쿨 사이트<br>
+                
+            </button>
+    
+    <div class = "my-box">
+        측정시간: <p4 id = "datetime_last_10"></p4><br>농도: <p3 id = "O3_last"></p3>ppm<br>
+        측정시간: <p4 id = "datetime_last_11"></p4><br>농도: <p3 id = "O3_last_2"></p3>ppm<br>
+        측정시간: <p4 id = "datetime_last_12"></p4><br>농도: <p3 id = "O3_last_3"></p3>ppm<br> 
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <canvas id="bar-chart-horizontal_10" width="370" height="120"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <canvas id="bar-chart-horizontal_11" width="370" height="120"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <canvas id="bar-chart-horizontal_12" width="370" height="120"></canvas>
+
+
+    <script>
+
+firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added', function(snapshot){
+                        //console.log(snapshot.child("PM").val())
+                        var O3_last = snapshot.child("O3").val();
+                        var datetime_last_10 = snapshot.child("datetime").val();
+
+                        document.getElementById('O3_last').outerText = O3_last;
+                        document.getElementById('datetime_last_10').outerText = datetime_last_10;
+                        
+                        
+    
+                        //document.write(PM_last + "<br>");
+    
+    
+                        // for(var i in snapshot.val()){
+                        //     document.write(i +" : " + snapshot.val()[i] + "<br>" + "<br>")
+    
+                        //     var PM = snapshot.val()[i].PM;
+    
+                        //     document.getElementById('PM').innerHTML = PM;
+                        // }
+    
+                        if(O3_last <= 0.03)
+                        {
+                            new Chart(document.getElementById("bar-chart-horizontal_10"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_10],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#87ceeb"],
+                                data: [O3_last]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 0.151,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '오존'
+                            }
+                            }
+                        });
+                    }
+
+                    else if(O3_last > 0.03 && 0.091)
+                        {
+                            new Chart(document.getElementById("bar-chart-horizontal_10"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_10],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#adff2f"],
+                                data: [O3_last]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 0.151,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '오존'
+                            }
+                            }
+                        });
+                    }
+
+
+                    else                        {
+                            new Chart(document.getElementById("bar-chart-horizontal_10"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_10],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#ff0000"],
+                                data: [O3_last]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 0.151,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '오존'
+                            }
+                            }
+                        });
+                    }
+                    });
+    
+                    firebase.database().ref('airQuality/2-pushJSON/').limitToLast(3).on('child_added', function(snapshot){
+                        //console.log(snapshot.child("PM").val())
+                        var O3_last_2 = snapshot.child("O3").val();
+                        var datetime_last_11 = snapshot.child("datetime").val();
+    
+                        document.getElementById('O3_last_2').outerText = O3_last_2;
+                        document.getElementById('datetime_last_11').outerText = datetime_last_11;
+    
+                        if(O3_last_2 <= 0.03)
+                        {
+                        new Chart(document.getElementById("bar-chart-horizontal_11"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_11],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#87ceeb"],
+                                data: [O3_last_2]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 0.151,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '오존'
+                            }
+                            }
+                        });
+    
+                    }
+
+                    else if(O3_last_2 > 0.03 && O3_last_2 < 0.091)
+                        {
+                        new Chart(document.getElementById("bar-chart-horizontal_11"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_11],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#adff2f"],
+                                data: [O3_last_2]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 0.151,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '오존'
+                            }
+                            }
+                        });
+    
+                    }
+
+                    else
+                        {
+                        new Chart(document.getElementById("bar-chart-horizontal_11"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_11],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#ff0000"],
+                                data: [O3_last_2]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 0.151,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '오존'
+                            }
+                            }
+                        });
+    
+                    }
+                    });
+    
+                    firebase.database().ref('airQuality/2-pushJSON/').limitToLast(2).on('child_added', function(snapshot){
+                //console.log(snapshot.child("PM").val())
+                var O3_last_3 = snapshot.child("O3").val();
+                var datetime_last_12 = snapshot.child("datetime").val();
+    
+                document.getElementById('O3_last_3').outerText = O3_last_3;
+                document.getElementById('datetime_last_12').outerText = datetime_last_12;
+    
+                if(O3_last_3 <= 0.03)
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_12"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_12],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#87ceeb"],
+                                data: [O3_last_3]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 0.151,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '오존'
+                            }
+                            }
+                        });
+                    }
+
+                    else if(O3_last_3 > 0.03 && O3_last_3 < 0.091)
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_12"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_12],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#adff2f"],
+                                data: [O3_last_3]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 0.151,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '오존'
+                            }
+                            }
+                        });
+                    }
+
+                    else
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_12"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_12],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#ff0000"],
+                                data: [O3_last_3]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 0.151,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '오존'
+                            }
+                            }
+                        });
+                    }
+            });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="120">
+    <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-SERVICE.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
+    <link rel = "stylesheet" href="/css/test.css">
+    <script type = "text/javascript" src = "db/app.js"></script>
+	<!--Google Login정보 js-->
+    <script type = "text/javascript" src = "googleLogin.js"></script> 
+	<!--firebase database js-->
+    <script type = "text/javascript" src = "db/database.js"></script>
+    <title>이산화탄소 데이터</title>
+    <style type="text/css">
+        .my-box {border: 3px solid blue; padding: 10px}
+    </style>
+</head>
+<body>
+    
+    <div align="center" class = "displaydata" style = "border: 5px solid skyblue; padding: 10px; color: black;">
+        <form action = "https://earth.nullschool.net/ko/#current/chem/surface/level/overlay=co2sc/orthographic=-232.03,35.88,10455/loc=126.908,35.683">
+            <button type="submit" class="button_image">이산화탄소 널스쿨 사이트<br>
+                
+            </button>
+    
+    <div class = "my-box">
+        측정시간: <p4 id = "datetime_last_7"></p4><br>농도: <p3 id = "CO2_last"></p3>㎛<br>
+        측정시간: <p4 id = "datetime_last_8"></p4><br>농도: <p3 id = "CO2_last_2"></p3>㎛<br>
+        측정시간: <p4 id = "datetime_last_9"></p4><br>농도: <p3 id = "CO2_last_3"></p3>㎛<br> 
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <canvas id="bar-chart-horizontal_7" width="370" height="120"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <canvas id="bar-chart-horizontal_8" width="370" height="120"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <canvas id="bar-chart-horizontal_9" width="370" height="120"></canvas>
+
+    <script>
+
+firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added', function(snapshot){
+                        //console.log(snapshot.child("PM").val())
+                        var CO2_last = snapshot.child("CO2").val();
+                        var datetime_last_7 = snapshot.child("datetime").val();
+
+
+                        document.getElementById('CO2_last').outerText = CO2_last;
+                        document.getElementById('datetime_last_7').outerText = datetime_last_7;
+
+                        //document.write(PM_last + "<br>");
+    
+    
+                        // for(var i in snapshot.val()){
+                        //     document.write(i +" : " + snapshot.val()[i] + "<br>" + "<br>")
+    
+                        //     var PM = snapshot.val()[i].PM;
+    
+                        //     document.getElementById('PM').innerHTML = PM;
+                        // }
+    
+                            if(CO2_last <= 450)
+                            {
+                            new Chart(document.getElementById("bar-chart-horizontal_7"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_7],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#87ceeb"],
+                                data: [CO2_last]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 1000,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '이산화탄소'
+                            }
+                            }
+                        });
+                    }
+
+                    else if(CO_last > 450 && CO_last < 1001)
+                            {
+                            new Chart(document.getElementById("bar-chart-horizontal_7"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_7],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#adff2f"],
+                                data: [CO2_last]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 1000,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '이산화탄소'
+                            }
+                            }
+                        });
+                    }
+
+                    else
+                            {
+                            new Chart(document.getElementById("bar-chart-horizontal_7"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_7],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#ff0000"],
+                                data: [CO2_last]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 1000,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '이산화탄소'
+                            }
+                            }
+                        });
+                    }
+                    });
+    
+                    firebase.database().ref('airQuality/2-pushJSON/').limitToLast(3).on('child_added', function(snapshot){
+                        //console.log(snapshot.child("PM").val())
+                        var CO2_last_2 = snapshot.child("CO2").val();
+                        var datetime_last_8 = snapshot.child("datetime").val();
+
+
+                        document.getElementById('CO2_last_2').outerText = CO2_last_2;
+                        document.getElementById('datetime_last_8').outerText = datetime_last_8;
+
+                        if(CO2_last_2 <= 450)
+                        {
+                        new Chart(document.getElementById("bar-chart-horizontal_8"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_8],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#87ceeb"],
+                                data: [CO2_last_2]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 1000,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '이산화탄소'
+                            }
+                            }
+                        });
+                    }
+
+                    else if(CO2_last_2 > 451 && CO2_last_2 < 1001)
+                        {
+                        new Chart(document.getElementById("bar-chart-horizontal_8"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_8],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#adff2f"],
+                                data: [CO2_last_2]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 1000,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '이산화탄소'
+                            }
+                            }
+                        });
+                    }
+
+                    else
+                        {
+                        new Chart(document.getElementById("bar-chart-horizontal_8"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_8],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#ff0000"],
+                                data: [CO2_last_2]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 1000,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '이산화탄소'
+                            }
+                            }
+                        });
+                    }
+    
+                    });
+    
+                    firebase.database().ref('airQuality/2-pushJSON/').limitToLast(2).on('child_added', function(snapshot){
+                //console.log(snapshot.child("PM").val())
+                var CO2_last_3 = snapshot.child("CO2").val();
+                var datetime_last_9 = snapshot.child("datetime").val();
+    
+                document.getElementById('CO2_last_3').outerText = CO2_last_3;
+                document.getElementById('datetime_last_9').outerText = datetime_last_9;
+    
+                if(CO2_last_3 <= 450)
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_9"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_9],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#87ceeb"],
+                                data: [CO2_last_3]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 1000,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '이산화탄소'
+                            }
+                            }
+                        });
+                    }
+
+                    else if(CO2_last_3 > 450 && CO2_last_3 < 1001)
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_9"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_9],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#adff2f"],
+                                data: [CO2_last_3]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 1000,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '이산화탄소'
+                            }
+                            }
+                        });
+                    }
+
+                    else
+                {
+                new Chart(document.getElementById("bar-chart-horizontal_9"), {
+                            type: 'horizontalBar',
+                            data: {
+                            labels: [datetime_last_9],
+                            datasets: [
+                                {
+                                //label: "Population (millions)",
+                                backgroundColor: ["#ff0000"],
+                                data: [CO2_last_3]
+                                }
+                            ]
+                            },
+                            options: {
+                                responsive: false,
+                            legend: { display: false },
+                            scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 1000,
+                                }
+                            }]
+                        },
+                            title: {
+                                display: true,
+                                text: '이산화탄소'
+                            }
+                            }
+                        });
+                    }
+            });
+
+    </script>
+    
+</body>
+</html>

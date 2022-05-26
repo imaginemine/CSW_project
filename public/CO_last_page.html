@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="120">
+    <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-SERVICE.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
+    <link rel = "stylesheet" href="/css/test.css">
+    <script type = "text/javascript" src = "db/app.js"></script>
+	<!--Google Login정보 js-->
+    <script type = "text/javascript" src = "googleLogin.js"></script> 
+	<!--firebase database js-->
+    <script type = "text/javascript" src = "db/database.js"></script>
+    <title>일산화탄소 데이터</title>
+    <style type="text/css">
+        .my-box {border: 3px solid blue; padding: 10px}
+    </style>
+</head>
+<body>
+    <div align="center" class = "displaydata" style = "border: 5px solid skyblue; padding: 10px; color: black;">
+        <form action = "https://earth.nullschool.net/ko/#current/chem/surface/level/overlay=cosc/orthographic=-232.03,35.88,10455/loc=126.908,35.683">
+            <button type="submit" class="button_image">일산화탄소 널스쿨 사이트<br>
+                
+            </button>
+    
+    <div class = "my-box">
+        측정시간: <p4 id = "datetime_last_4"></p4><br>농도: <p3 id = "CO_last"></p3>㎛<br>
+        측정시간: <p4 id = "datetime_last_5"></p4><br>농도: <p3 id = "CO_last_2"></p3>㎛<br>
+        측정시간: <p4 id = "datetime_last_6"></p4><br>농도: <p3 id = "CO_last_3"></p3>㎛<br> 
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <canvas id="bar-chart-horizontal_4" width="370" height="120"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <canvas id="bar-chart-horizontal_5" width="370" height="120"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <canvas id="bar-chart-horizontal_6" width="370" height="120"></canvas>
+
+    <script>
+
+firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added', function(snapshot){
+                    //console.log(snapshot.child("PM").val())
+                    var CO_last = snapshot.child("CO").val();
+                    var datetime_last_4 = snapshot.child("datetime").val();
+
+                    document.getElementById('CO_last').outerText = CO_last;
+                    document.getElementById('datetime_last_4').outerText = datetime_last_4;
+                    
+
+                    //document.write(PM_last + "<br>");
+
+
+                    // for(var i in snapshot.val()){
+                    //     document.write(i +" : " + snapshot.val()[i] + "<br>" + "<br>")
+
+                    //     var PM = snapshot.val()[i].PM;
+
+                    //     document.getElementById('PM').innerHTML = PM;
+                    // }
+
+                        if(CO_last <= 2)
+                        {
+                        new Chart(document.getElementById("bar-chart-horizontal_4"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_4],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#87ceeb"],
+                            data: [CO_last]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 15.1,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '일산화탄소'
+                        }
+                        }
+                    });
+                }
+
+                else if(CO_last > 2 && CO_last < 10)
+                        {
+                        new Chart(document.getElementById("bar-chart-horizontal_4"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_4],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#adff2f"],
+                            data: [CO_last]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 15.1,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '일산화탄소'
+                        }
+                        }
+                    });
+                }
+
+                else
+                        {
+                        new Chart(document.getElementById("bar-chart-horizontal_4"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_4],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#ff0000"],
+                            data: [CO_last]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 15.1,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '일산화탄소'
+                        }
+                        }
+                    });
+                }
+                });
+
+                firebase.database().ref('airQuality/2-pushJSON/').limitToLast(3).on('child_added', function(snapshot){
+                    //console.log(snapshot.child("PM").val())
+                    var CO_last_2 = snapshot.child("CO").val();
+                    var datetime_last_5 = snapshot.child("datetime").val();
+
+                    if(CO_last_2 <= 2)
+                    {
+                    document.getElementById('CO_last_2').outerText = CO_last_2;
+                    document.getElementById('datetime_last_5').outerText = datetime_last_5;
+
+                    new Chart(document.getElementById("bar-chart-horizontal_5"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_5],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#87ceeb"],
+                            data: [CO_last_2]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 15.1,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '일산화탄소'
+                        }
+                        }
+                    });
+                }
+
+                else if(CO_last_2  > 2 && CO_last_2 < 10)
+                    {
+                    document.getElementById('CO_last_2').outerText = CO_last_2;
+                    document.getElementById('datetime_last_5').outerText = datetime_last_5;
+
+                    new Chart(document.getElementById("bar-chart-horizontal_5"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_5],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#adff2f"],
+                            data: [CO_last_2]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 15.1,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '일산화탄소'
+                        }
+                        }
+                    });
+                }
+
+                else
+                    {
+                    document.getElementById('CO_last_2').outerText = CO_last_2;
+                    document.getElementById('datetime_last_5').outerText = datetime_last_5;
+
+                    new Chart(document.getElementById("bar-chart-horizontal_5"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_5],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#ff0000"],
+                            data: [CO_last_2]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 15.1,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '일산화탄소'
+                        }
+                        }
+                    });
+                }
+
+                });
+
+                firebase.database().ref('airQuality/2-pushJSON/').limitToLast(2).on('child_added', function(snapshot){
+            //console.log(snapshot.child("PM").val())
+            var CO_last_3 = snapshot.child("CO").val();
+            var datetime_last_6 = snapshot.child("datetime").val();
+
+            document.getElementById('CO_last_3').outerText = CO_last_3;
+            document.getElementById('datetime_last_6').outerText = datetime_last_6;
+
+            if(CO_last_3 <=2)
+            {
+            new Chart(document.getElementById("bar-chart-horizontal_6"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_6],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#87ceeb"],
+                            data: [CO_last_3]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 15.1,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '일산화탄소'
+                        }
+                        }
+                    });
+                }
+
+                else if(CO_last_3 > 2 && CO_last_3 < 10)
+            {
+            new Chart(document.getElementById("bar-chart-horizontal_6"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_6],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#adff2f"],
+                            data: [CO_last_3]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 15.1,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '일산화탄소'
+                        }
+                        }
+                    });
+                }
+
+                else
+            {
+            new Chart(document.getElementById("bar-chart-horizontal_6"), {
+                        type: 'horizontalBar',
+                        data: {
+                        labels: [datetime_last_6],
+                        datasets: [
+                            {
+                            //label: "Population (millions)",
+                            backgroundColor: ["#ff0000"],
+                            data: [CO_last_3]
+                            }
+                        ]
+                        },
+                        options: {
+                            responsive: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 15.1,
+                                }
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: '일산화탄소'
+                        }
+                        }
+                    });
+                }
+        });
+
+    </script>
+
+</body>
+</html>

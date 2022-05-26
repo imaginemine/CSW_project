@@ -173,8 +173,8 @@ $('#goodsShowBtn3').click(function() {
 
     </script>
     <div>
-        <button id = "goodsShowBtn4">데이터 보이기</button>
-        <button id="goodsHideBtn4">데이터 숨기기</button>
+        <button id = "goodsShowBtn4">그래프 보이기</button>
+        <button id="goodsHideBtn4">그래프 숨기기</button>
         <div id = "goodsShowDiv4">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <canvas id="bar-chart-horizontal_4" width="370" height="120"></canvas>
@@ -254,8 +254,8 @@ $('#goodsShowBtn3').click(function() {
             </script>
 
         <div>
-            <button id = "goodsShowBtn6">데이터 보이기</button>
-        <button id="goodsHideBtn6">데이터 숨기기</button>
+            <button id = "goodsShowBtn6">그래프 보이기</button>
+        <button id="goodsHideBtn6">그래프 숨기기</button>
         <div id = "goodsShowDiv6">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <canvas id="bar-chart-horizontal_7" width="370" height="120"></canvas>
@@ -333,8 +333,8 @@ $('#goodsShowBtn3').click(function() {
             </script>
 
     <div>
-        <button id = "goodsShowBtn8">데이터 보이기</button>
-        <button id="goodsHideBtn8">데이터 숨기기</button>
+        <button id = "goodsShowBtn8">그래프 보이기</button>
+        <button id="goodsHideBtn8">그래프 숨기기</button>
         <div id = "goodsShowDiv8">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <canvas id="bar-chart-horizontal_10" width="370" height="120"></canvas>
@@ -807,6 +807,7 @@ $('#goodsShowBtn3').click(function() {
                         }
                         }
                     });
+                    document.getElementById('datetime_last_0_message').outerText = "초미세먼지 보통";
                 }
 
                 else
@@ -840,6 +841,7 @@ $('#goodsShowBtn3').click(function() {
                         }
                         }
                     });
+                    document.getElementById('datetime_last_0_message').outerText = "초미세먼지 나쁨";
                 }
 
         });
@@ -1230,6 +1232,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                         }
                         }
                     });
+                    document.getElementById('datetime_last_02_message').outerText = "일산화탄소 좋음";
                 }
 
                 else if(CO_last_02 > 2 && CO_last_02 < 10)
@@ -1263,6 +1266,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                         }
                         }
                     });
+                    document.getElementById('datetime_last_02_message').outerText = "일산화탄소 보통";
                 }
 
                 else
@@ -1296,6 +1300,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                         }
                         }
                     });
+                    document.getElementById('datetime_last_02_message').outerText = "일산화탄소 나쁨";
                 }
         });
 
@@ -1681,6 +1686,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             }
                             }
                         });
+                        document.getElementById('datetime_last_03_message').outerText = "이산화탄소 좋음";
                     }
 
                     else if(CO2_last_03 > 450 && CO2_last_03 < 1001)
@@ -1714,6 +1720,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             }
                             }
                         });
+                        document.getElementById('datetime_last_03_message').outerText = "이산화탄소 보통";
                     }
 
                     else
@@ -1747,6 +1754,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             }
                             }
                         });
+                        document.getElementById('datetime_last_03_message').outerText = "이산화탄소 나쁨";
                     }
             });
     
@@ -2124,7 +2132,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             xAxes: [{
                                 ticks: {
                                     suggestedMin: 0,
-                                    suggestedMax: 0.151,
+                                    suggestedMax: 0.091,
                                 }
                             }]
                         },
@@ -2134,6 +2142,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             }
                             }
                         });
+                        document.getElementById('datetime_last_04_message').outerText = "오존 좋음";
                     }
 
                     else if(O3_last_04 > 0.03 && O3_last_04 < 0.091)
@@ -2157,7 +2166,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             xAxes: [{
                                 ticks: {
                                     suggestedMin: 0,
-                                    suggestedMax: 0.151,
+                                    suggestedMax: 0.091,
                                 }
                             }]
                         },
@@ -2167,6 +2176,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             }
                             }
                         });
+                        document.getElementById('datetime_last_04_message').outerText = "오존 보통";
                     }
 
                     else
@@ -2190,7 +2200,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             xAxes: [{
                                 ticks: {
                                     suggestedMin: 0,
-                                    suggestedMax: 0.151,
+                                    suggestedMax: 0.091,
                                 }
                             }]
                         },
@@ -2200,6 +2210,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             }
                             }
                         });
+                        document.getElementById('datetime_last_04_message').outerText = "오존 나쁨";
                     }
             });
     

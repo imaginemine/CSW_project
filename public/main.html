@@ -79,10 +79,11 @@
 
     <script>
 
-
-    $('#goodsHideBtn').click(function() {
-    $("#goodsShowDiv").hide();
-    // goodsBtn을 클릭하면 goodsDiv를 숨겨라
+        $(document).ready(function(){
+                $("#goodsHideBtn").trigger('click');
+            })
+            $('#goodsHideBtn').click(function() {
+            $("#goodsShowDiv").hide();  
 
     })
     </script>
@@ -110,9 +111,11 @@
         <script>
     
     
-        $('#goodsHideBtn2').click(function() {
-        $("#goodsShowDiv2").hide();
-        // goodsBtn을 클릭하면 goodsDiv를 숨겨라
+            $(document).ready(function(){
+                $("#goodsHideBtn2").trigger('click');
+            })
+            $('#goodsHideBtn2').click(function() {
+            $("#goodsShowDiv2").hide();
     
         })
         </script>
@@ -129,28 +132,78 @@
 <!--<hr class = "data-line">-->
 
 <div align="center" class = "displaydata" style = "border: 5px solid skyblue; padding: 10px; color: black;">
-    <form action = "https://earth.nullschool.net/ko/#current/chem/surface/level/overlay=no2/orthographic=-232.76,36.36,7096/loc=126.914,35.605">
+    <form action = "./CO_last_page.html">
         <button type="submit" class="button_image">
              <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
             <canvas id="bar-chart-horizontal_02" width="240" height="120"></canvas>
-
+            <p3 id = "datetime_last_02_message"></p3>
         </button>
      </form>
      
-     <div class = "my-box">
+     <div>
+        <button id = "goodsShowBtn3">데이터 보이기</button>
+        <button id="goodsHideBtn3">데이터 숨기기</button>
+        
+     <div id = "goodsShowDiv3" class = "my-box">
         측정시간: <p4 id = "datetime_last_4"></p4><br>농도: <p3 id = "CO_last"></p3>ppm<br>
         측정시간: <p4 id = "datetime_last_5"></p4><br>농도: <p3 id = "CO_last_2"></p3>ppm<br>
         측정시간: <p4 id = "datetime_last_6"></p4><br>농도: <p3 id = "CO_last_3"></p3>ppm<br> 
          측정시간: <p4 id = "datetime_last_02"></p4><br>농도: <p3 id = "CO_last_02"></p3>ppm<br> 
-
+        </div>
     </div>
+
+    <script>
+
+$('#goodsShowBtn3').click(function() {
+    $("#goodsShowDiv3").show();
+        // goodsBtn을 클릭하면 goodsDiv를 보여줘라
+})
+    </script>
+
+    <script>
+
+
+        $(document).ready(function(){
+                $("#goodsHideBtn3").trigger('click');
+            })
+            $('#goodsHideBtn3').click(function() {
+            $("#goodsShowDiv3").hide();
+
+    })
+
+    </script>
+    <div>
+        <button id = "goodsShowBtn4">그래프 보이기</button>
+        <button id="goodsHideBtn4">그래프 숨기기</button>
+        <div id = "goodsShowDiv4">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <canvas id="bar-chart-horizontal_4" width="370" height="120"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <canvas id="bar-chart-horizontal_5" width="370" height="120"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <canvas id="bar-chart-horizontal_6" width="370" height="120"></canvas>
-    
+        </div>
+    </div>
+
+    <script>
+
+        $('#goodsShowBtn4').click(function() {
+            $("#goodsShowDiv4").show();
+                // goodsBtn을 클릭하면 goodsDiv를 보여줘라
+        })
+            </script>
+        
+            <script>
+
+        $(document).ready(function(){
+                $("#goodsHideBtn4").trigger('click');
+            })
+            $('#goodsHideBtn4').click(function() {
+            $("#goodsShowDiv4").hide();
+        
+            })
+        
+            </script>
 
      <br>
      <p3 id = "Message_CO_2"></p3>
@@ -161,28 +214,75 @@
 <!--<hr class = "data-line">-->               
             
 <div align="center" class = "displaydata" style = "border: 5px solid skyblue; padding: 10px; color: black;">
-    <form action = "https://earth.nullschool.net/ko/#current/chem/surface/level/overlay=co2sc/orthographic=-232.76,36.36,7096/loc=126.914,35.605">
+    <form action = "./CO2_last_page.html">
         <button type="submit" class="button_image">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
             <canvas id="bar-chart-horizontal_03" width="240" height="120"></canvas>
-
+            <p3 id = "datetime_last_03_message"></p3>
         </button>
      </form>
-     
-     <div class = "my-box">
+     <div>
+        <button id = "goodsShowBtn5">데이터 보이기</button>
+        <button id="goodsHideBtn5">데이터 숨기기</button>
+            <div id = "goodsShowDiv5" class = "my-box">
         측정시간: <p4 id = "datetime_last_7"></p4><br>농도: <p3 id = "CO2_last"></p3>ppm<br>
         측정시간: <p4 id = "datetime_last_8"></p4><br>농도: <p3 id = "CO2_last_2"></p3>ppm<br>
         측정시간: <p4 id = "datetime_last_9"></p4><br>농도: <p3 id = "CO2_last_3"></p3>ppm<br> 
         측정시간: <p4 id = "datetime_last_03"></p4><br>농도: <p3 id = "CO2_last_03"></p3>ppm<br> 
-
     </div>
+    </div>
+
+    <script>
+
+        $('#goodsShowBtn5').click(function() {
+            $("#goodsShowDiv5").show();
+                // goodsBtn을 클릭하면 goodsDiv를 보여줘라
+        })
+            </script>
+        
+            <script>
+        
+        
+        $(document).ready(function(){
+                $("#goodsHideBtn5").trigger('click');
+            })
+            $('#goodsHideBtn5').click(function() {
+            $("#goodsShowDiv5").hide();
+        
+            })
+        
+            </script>
+
+        <div>
+            <button id = "goodsShowBtn6">그래프 보이기</button>
+        <button id="goodsHideBtn6">그래프 숨기기</button>
+        <div id = "goodsShowDiv6">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <canvas id="bar-chart-horizontal_7" width="370" height="120"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <canvas id="bar-chart-horizontal_8" width="370" height="120"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <canvas id="bar-chart-horizontal_9" width="370" height="120"></canvas>
+        </div>
+        </div>
 
+        <script>
+
+            $('#goodsShowBtn6').click(function() {
+                $("#goodsShowDiv6").show();
+                    // goodsBtn을 클릭하면 goodsDiv를 보여줘라
+            })
+                </script>
+            
+                <script>
+            $(document).ready(function(){
+                $("#goodsHideBtn6").trigger('click');
+            })
+            $('#goodsHideBtn6').click(function() {
+            $("#goodsShowDiv6").hide();
+                })
+            
+                </script>
      <br>
      <p3 id = "Message_CO2_2"></p3>
      <br>
@@ -192,27 +292,80 @@
  <!--<hr class = "data-line">-->
 
 <div align="center" class = "displaydata" style = "border: 5px solid skyblue; padding: 10px; color: black;">
-     <form action = "https://earth.nullschool.net/ko/#current/chem/surface/level/overlay=co2sc/orthographic=-232.51,36.27,11746/loc=74.905,29.679">
+     <form action = "./O3_last_page.html">
          <button type="submit" class="button_image">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
             <canvas id="bar-chart-horizontal_04" width="240" height="120"></canvas>
-
+            <p3 id = "datetime_last_04_message"></p3>
          </button>
     </form>
     
-    <div class = "my-box">
+    <div>
+        <button id = "goodsShowBtn7">데이터 보이기</button>
+        <button id="goodsHideBtn7">데이터 숨기기</button>
+    <div id = "goodsShowDiv7" class = "my-box">
         측정시간: <p4 id = "datetime_last_10"></p4><br>농도: <p3 id = "O3_last"></p3>ppm<br>
         측정시간: <p4 id = "datetime_last_11"></p4><br>농도: <p3 id = "O3_last_2"></p3>ppm<br>
         측정시간: <p4 id = "datetime_last_12"></p4><br>농도: <p3 id = "O3_last_3"></p3>ppm<br> 
         측정시간: <p4 id = "datetime_last_04"></p4><br>농도: <p3 id = "O3_last_04"></p3>ppm<br> 
 
     </div>
+    </div>
+
+    <script>
+
+        $('#goodsShowBtn7').click(function() {
+            $("#goodsShowDiv7").show();
+                // goodsBtn을 클릭하면 goodsDiv를 보여줘라
+        })
+            </script>
+        
+            <script>
+        $(document).ready(function(){
+                $("#goodsHideBtn7").trigger('click');
+            })
+            $('#goodsHideBtn7').click(function() {
+            $("#goodsShowDiv7").hide();
+            // goodsBtn을 클릭하면 goodsDiv를 숨겨라
+        
+            })
+        
+            </script>
+
+    <div>
+        <button id = "goodsShowBtn8">그래프 보이기</button>
+        <button id="goodsHideBtn8">그래프 숨기기</button>
+        <div id = "goodsShowDiv8">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <canvas id="bar-chart-horizontal_10" width="370" height="120"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <canvas id="bar-chart-horizontal_11" width="370" height="120"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <canvas id="bar-chart-horizontal_12" width="370" height="120"></canvas>
+    </div>
+    </div>
+
+
+    <script>
+
+        $('#goodsShowBtn8').click(function() {
+            $("#goodsShowDiv8").show();
+                // goodsBtn을 클릭하면 goodsDiv를 보여줘라
+        })
+            </script>
+        
+            <script>
+        
+                $(document).ready(function(){
+                $("#goodsHideBtn8").trigger('click');
+            })
+            $('#goodsHideBtn8').click(function() {
+            $("#goodsShowDiv8").hide();
+            // goodsBtn을 클릭하면 goodsDiv를 숨겨라
+        
+            })
+        
+            </script>
 
     <br>
     <p3 id = "Message_O32"></p3>
@@ -654,6 +807,7 @@
                         }
                         }
                     });
+                    document.getElementById('datetime_last_0_message').outerText = "초미세먼지 보통";
                 }
 
                 else
@@ -687,6 +841,7 @@
                         }
                         }
                     });
+                    document.getElementById('datetime_last_0_message').outerText = "초미세먼지 나쁨";
                 }
 
         });
@@ -1077,6 +1232,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                         }
                         }
                     });
+                    document.getElementById('datetime_last_02_message').outerText = "일산화탄소 좋음";
                 }
 
                 else if(CO_last_02 > 2 && CO_last_02 < 10)
@@ -1110,6 +1266,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                         }
                         }
                     });
+                    document.getElementById('datetime_last_02_message').outerText = "일산화탄소 보통";
                 }
 
                 else
@@ -1143,6 +1300,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                         }
                         }
                     });
+                    document.getElementById('datetime_last_02_message').outerText = "일산화탄소 나쁨";
                 }
         });
 
@@ -1528,6 +1686,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             }
                             }
                         });
+                        document.getElementById('datetime_last_03_message').outerText = "이산화탄소 좋음";
                     }
 
                     else if(CO2_last_03 > 450 && CO2_last_03 < 1001)
@@ -1561,6 +1720,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             }
                             }
                         });
+                        document.getElementById('datetime_last_03_message').outerText = "이산화탄소 보통";
                     }
 
                     else
@@ -1594,6 +1754,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             }
                             }
                         });
+                        document.getElementById('datetime_last_03_message').outerText = "이산화탄소 나쁨";
                     }
             });
     
@@ -1971,7 +2132,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             xAxes: [{
                                 ticks: {
                                     suggestedMin: 0,
-                                    suggestedMax: 0.151,
+                                    suggestedMax: 0.091,
                                 }
                             }]
                         },
@@ -1981,6 +2142,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             }
                             }
                         });
+                        document.getElementById('datetime_last_04_message').outerText = "오존 좋음";
                     }
 
                     else if(O3_last_04 > 0.03 && O3_last_04 < 0.091)
@@ -2004,7 +2166,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             xAxes: [{
                                 ticks: {
                                     suggestedMin: 0,
-                                    suggestedMax: 0.151,
+                                    suggestedMax: 0.091,
                                 }
                             }]
                         },
@@ -2014,6 +2176,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             }
                             }
                         });
+                        document.getElementById('datetime_last_04_message').outerText = "오존 보통";
                     }
 
                     else
@@ -2037,7 +2200,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             xAxes: [{
                                 ticks: {
                                     suggestedMin: 0,
-                                    suggestedMax: 0.151,
+                                    suggestedMax: 0.091,
                                 }
                             }]
                         },
@@ -2047,6 +2210,7 @@ firebase.database().ref('airQuality/2-pushJSON/').limitToLast(4).on('child_added
                             }
                             }
                         });
+                        document.getElementById('datetime_last_04_message').outerText = "오존 나쁨";
                     }
             });
     

@@ -42,11 +42,26 @@ https://github.com/PQ777/test1
 1. 공기질 값에 따라 과거 데이터 및 현제 데이터 색상 자동 변경 수정
 및 창 인터페이스 숨기기,보이기 기능 추가
 
+
 ![1](https://user-images.githubusercontent.com/102477933/170295630-f1d6d237-e010-4e4d-9453-a208d6b5783f.jpg)
 
 ![2](https://user-images.githubusercontent.com/102477933/170295675-c4eb6d5c-ce40-49a6-a574-1adf15dbc793.jpg)
 
 ![3](https://user-images.githubusercontent.com/102477933/170295699-dfbf81b2-a030-4169-8630-93f5d48cf041.jpg)
 
+22/05/26 PM
+1. 모든 공기 그래프 및 과거데이터 페이지 추가 
+및 모든 값 인터페이스 숨기기, 보이기 기능 추가
 
+![1](https://user-images.githubusercontent.com/102477933/170467528-88f613d4-f3a2-45b0-a12e-74e7e749230f.jpg)
+
+![2](https://user-images.githubusercontent.com/102477933/170467563-c281e1bb-9168-403c-9cb7-e36672671b4d.jpg)
+
+![3](https://user-images.githubusercontent.com/102477933/170467630-1142a53e-e284-4719-b6e4-d3066f851b93.jpg)
+
+![4](https://user-images.githubusercontent.com/102477933/170467671-20254c08-2a36-4b95-a06d-d3f6ade3c58a.jpg)
+
+![5](https://user-images.githubusercontent.com/102477933/170467692-36167e93-e945-4c2f-8a65-53b59d4906fe.jpg)
+
+![6](https://user-images.githubusercontent.com/102477933/170467713-c32a1cf8-60b5-40bc-9c25-7a5547e4c1ee.jpg)
 
